@@ -1,27 +1,26 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<html>
-<head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <meta http-equiv="Content-Style-Type" content="text/css">
-  <title></title>
-  <meta name="Generator" content="Cocoa HTML Writer">
-  <meta name="CocoaVersion" content="1504.83">
-  <style type="text/css">
-    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; line-height: 14.0px; font: 12.0px Times; color: #000000; -webkit-text-stroke: #000000}
-    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; line-height: 14.0px; font: 12.0px Times; color: #000000; -webkit-text-stroke: #000000; min-height: 14.0px}
-    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; text-align: center; line-height: 14.0px; font: 12.0px Times; color: #000000; -webkit-text-stroke: #000000}
-    span.s1 {font-kerning: none}
-    span.s2 {font: 10.5px 'Hiragino Sans GB'; font-kerning: none; color: #222222; background-color: #ffffff; -webkit-text-stroke: 0px #222222}
-    span.s3 {font: 10.5px Helvetica; font-kerning: none; color: #222222; background-color: #ffffff; -webkit-text-stroke: 0px #222222}
-    span.s4 {font: 10.5px 'Hiragino Sans'; font-kerning: none; color: #222222; background-color: #ffffff; -webkit-text-stroke: 0px #222222}
-    span.s5 {text-decoration: underline ; font-kerning: none; color: #0000ee; -webkit-text-stroke: 0px #0000ee}
-  </style>
-</head>
-<body>
-<p class="p1"><span class="s1">--- layout: default include: analytics title: Jesse Jenks ---</span></p>
-<p class="p1"><span class="s2"> </span><span class="s1">Jesse Eggs. Jenks</span><span class="s3"> </span><span class="s4"></span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">Left and right arrows to change rules, press 'r' to reset, and 'p' to pause</span></p>
-<p class="p3"><span class="s1">If you want to learn more about cellular automata, click <a href="http://mathworld.wolfram.com/CellularAutomaton.html"><span class="s5">here</span></a>, <a href="https://plato.stanford.edu/entries/cellular-automata/"><span class="s5">here</span></a>, <a href="http://www.mirekw.com/ca/rullex_life.html"><span class="s5">here</span></a>, or <a href="http://www.stephenwolfram.com/publications/academic/computation-theory-cellular-automata.pdf"><span class="s5">here</span></a>, or read <a href="https://www.amazon.com/exec/obidos/ASIN/1579550088/ref=nosim/ericstreasuretro"><span class="s5">this</span></a> gigantic book.<span class="Apple-converted-space"> </span></span></p>
-</body>
-</html>
+---
+layout: default
+include: analytics
+title: Jesse Jenks
+---
+<!-- P5.js -->
+<script src="/js/libraries/p5.js" type="text/javascript"></script>
+<script src="/js/libraries/p5.dom.js" type="text/javascript"></script>
+<!-- <script src="/js/boids.js"></script> -->
+<script src="/js/automata.js"></script>
+
+<div class="blurb">
+  <p style="display: flex;justify-content: center;text-align: center;">Jesse Eggs. Jenks</p>
+</div><!-- /.blurb -->
+<div id="automata"></div>
+<div id="name_of_rule" style="display: flex;justify-content: center;text-align: center;"></div>
+<div style="display: flex;justify-content: center;text-align: center;">Left and right arrows to change rules, press 'r' to reset, and 'p' to pause</div>
+<div style="justify-content: center;text-align: center;">
+If you want to learn more about cellular automata, click
+<a href="http://mathworld.wolfram.com/CellularAutomaton.html">here</a>,
+<a href="https://plato.stanford.edu/entries/cellular-automata/">here</a>,
+<a href="http://www.mirekw.com/ca/rullex_life.html">here</a>,
+or <a href="http://www.stephenwolfram.com/publications/academic/computation-theory-cellular-automata.pdf">here</a>,
+or read <a href="https://www.amazon.com/exec/obidos/ASIN/1579550088/ref=nosim/ericstreasuretro">this</a> gigantic book.
+<br>
+</div>
