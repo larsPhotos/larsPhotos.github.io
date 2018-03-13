@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+	<html>
+		<head>
+			<title>{{ page.title }}</title>
+			<!-- favicon -->
+			<link rel="shortcut icon" type="image/x-icon" href="data/favicon.ico">
+			<!-- Load Mathjax stuff -->
+			<!-- deprecated -->
+			<!-- src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML"> -->
+			<!-- <script type="text/javascript" async
+				src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script> -->
+			<script type="text/javascript" async src="https://cdn.rawgit.com/mathjax/MathJax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+			<script type="text/javascript" src="/js/transcendental_list.js"></script>
+			<!-- Main stylesheets -->
+			<link href='//fonts.googleapis.com/css?family=Josefin Sans' rel='stylesheet'>
+			<link rel="stylesheet" type="text/css" href="/css/main.css">
+			<link rel="stylesheet" type="text/css" href="/css/syntax.css">
+		</head>
+		<body>
+			<nav>
+	    		<ul>
+	        		<li><a href="/">Home</a></li>
+		        	<li><a href="/about">About</a></li>
+					<li><a href="/links">Links</a></li>
+	        		<li><a href="/blog">Blog</a></li>
+	    		</ul>
+			</nav>
+			<div class="container">
+
+			{{ content }}
+
+			</div>
+			<!-- for the "What's this?" tabs -->
+			<script>
+			var acc = document.getElementsByClassName("accordion");
+			for (let i = 0; i<acc.length; i++) {
+				acc[i].onclick = function(){
+				this.classList.toggle("active");
+				this.parentNode.nextElementSibling.classList.toggle("show");
+			  };
+			};
+			</script>
+			<footer style="justify-content: center;">
+				<ul>
+					<li><a href="mailto:jjenks@pugetsound.edu">email</a></li>
+					<li><a target="_blank" href="https://www.github.com/jessejenks">github</a></li>
+					<li>Math, Computer Science student at <a href="http://www.pugetsound.edu/">UPS</a></li>
+				</ul>
+				<ul style="margin-top:-0.8em;">
+					<li><a target="_blank" href="http://p5js.org/"><img title="p5js" src="/data/p5js.png" height="22px" border="0"></a></li>
+					<a href="https://d3js.org"><img title="D3js" src="https://d3js.org/logo.svg" height="22px"></a>
+					<li><a target="_blank" href="https://www.mathjax.org"><img title="Powered by MathJax" src="https://cdn.mathjax.org/mathjax/badge/badge.gif" height="22px" border="0" alt="Powered by MathJax"></a></li>
+					<li><a target="_blank" id="transcendental"></a></li>
+				</ul>
+				<script>
+					var n = Math.floor(Math.random()*transcendentals.length);
+					var t = document.getElementById('transcendental');
+					t.href = transcendentals[n].link;
+					t.innerText = transcendentals[n].number;
+				</script>
+			</footer>
+		</body>
+	</html>

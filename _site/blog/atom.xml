@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+	<title>Jesse Jenks' Blog</title>
+	<link href="http://jessejenks.github.io/blog/atom.xml" rel="self"/>
+	<link href="http://jessejenks.github.io/blog"/>
+	<updated>2016-11-27T15:24:21-08:00</updated>
+	<id>http://jessejenks.github.io/blog</id>
+	<author>
+		<name>Jesse Jenks</name>
+		<email>jjenks@pugetsound.edu</email>
+	</author>
+
+	
+		<entry>
+			<title>Binary Sequences</title>
+			<link href="http://jessejenks.github.io/blog/2016/11/22/Binary-Sequences"/>
+			<updated>2016-11-22T00:00:00-08:00</updated>
+			<id>http://jessejenks.github.io//blog/2016/11/22/Binary-Sequences</id>
+			<content type="html">&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;../../../../css/unpredictable.css&quot; /&gt;
+
+&lt;script src=&quot;../../../../js/sequence.js&quot;&gt;&lt;/script&gt;
+
+&lt;script src=&quot;../../../../js/p5libraries/p5.js&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt;
+
+&lt;script src=&quot;../../../../js/p5libraries/p5.dom.js&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt;
+
+&lt;p&gt;Recently, my abstract algebra teacher mentioned a very interesting class of binary sequences called “maximally unpredictable” sequences, so I decided to make a simple generator. Hit &lt;code class=&quot;highlighter-rouge&quot;&gt;Generate Sequence&lt;/code&gt; if you want to see the original sequence(&lt;a href=&quot;https://oeis.org/A038219&quot;&gt;A038219&lt;/a&gt;), or type in any binary sequence and this will generate the “most unpredictable” sequence based off of your input.&lt;/p&gt;
+
+&lt;p&gt;&lt;input type=&quot;text&quot; id=&quot;inputSequence&quot; placeholder=&quot;0,1,0&quot; /&gt;
+&lt;br /&gt;
+&lt;!-- &lt;button onClick=&quot;doStuff()&quot;&gt;Generate Sequence&lt;/button&gt; --&gt;
+&lt;input type=&quot;submit&quot; onclick=&quot;doStuff()&quot; value=&quot;Generate Sequence&quot; /&gt;
+&lt;!-- &lt;code&gt;&lt;div id=&quot;showSequence1&quot;&gt;&lt;/div&gt;&lt;/code&gt; --&gt;&lt;/p&gt;
+&lt;div id=&quot;showSequence1&quot;&gt;&lt;/div&gt;
+&lt;script&gt;
+function doStuff() {
+  var input = document.getElementById(&quot;inputSequence&quot;).value.split(&quot;,&quot;).map(function(num){
+      if (num === &quot;0&quot; || num === &quot;1&quot;){
+        return parseInt(num);
+      } else if (num === &quot; 0&quot; || num === &quot; 1&quot;){
+        return parseInt(num.slice(1))
+      }
+    });
+    if (input[0]===undefined){ input = [0];}
+  document.getElementById(&quot;showSequence1&quot;).innerText = generate_em(input);
+}
+&lt;/script&gt;
+
+&lt;p&gt;I first got interested in binary sequences in the summer of 2014 when I came across the Thue-Morse sequence (&lt;a href=&quot;https://oeis.org/A010060&quot;&gt;A010060&lt;/a&gt;). This sequence is defined recursively:&lt;/p&gt;
+
+&lt;p&gt;&lt;a target=&quot;_blank&quot;&gt;&lt;img src=&quot;http://latex.codecogs.com/png.latex?\dpi{150}&amp;space;\begin{align*}&amp;space;T_0&amp;space;&amp;amp;=&amp;space;0\\&amp;space;T_{2n}&amp;space;&amp;amp;=&amp;space;T_n\\&amp;space;T_{2n&amp;plus;1}&amp;space;&amp;amp;=&amp;space;1&amp;space;-&amp;space;T_n&amp;space;\end{align*}&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Here’s what that sequence looks like.&lt;/p&gt;
+
+&lt;div id=&quot;showSequence2&quot;&gt;&lt;/div&gt;
+&lt;script&gt;document.getElementById(&quot;showSequence2&quot;).innerText = generate_thm();&lt;/script&gt;
+
+&lt;p&gt;That summer I spent an inordinate amount of time working out this (messy) closed form solution&lt;/p&gt;
+
+&lt;p&gt;&lt;a target=&quot;_blank&quot;&gt;&lt;img src=&quot;http://latex.codecogs.com/png.latex?\dpi{100}&amp;space;\large&amp;space;T_n&amp;space;=&amp;space;1&amp;plus;\left(\sum_{k=0}^{\lfloor\log_2(n)\rfloor-1}\left\lfloor\frac{n}{2^k}\right\rfloor&amp;space;\mod&amp;space;2&amp;space;\right&amp;space;)&amp;space;\mod&amp;space;2&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;There are other closed form solutions involving sines and binomial coefficients, but I have not seen this particular solution anywhere.&lt;/p&gt;
+
+&lt;p&gt;This sequence has some very interesting ‘fractal’ properties. For example, if you break up the sequence into ‘chunks’ of length 2^n, and stack these chunks on top of each other, we get some cool patterns. For example if n=2, we take the first 4 terms of the sequence as a row, then the next row has the 5th through 8th term, and so on. Here are those patterns for n = 1, 2, 3, and 4.&lt;/p&gt;
+
+&lt;iframe src=&quot;../../../../js/thue.html&quot;, width=&quot;671px&quot;, height=&quot;161px&quot;&gt;&lt;/iframe&gt;
+&lt;p&gt;But the coolest property has got to be this: if you interpret the sequence as a set of instructions where 0 means move forward, and 1 means rotate π/3, a familiar pattern begins to emerge…&lt;/p&gt;
+
+&lt;iframe src=&quot;../../../../js/thue-turtle.html&quot;, width=&quot;512px&quot;, height=&quot;512px&quot;&gt;&lt;/iframe&gt;
+
+&lt;p&gt;Details on why this happens can be found &lt;a href=&quot;http://personal.kenyon.edu/holdenerj/StudentResearch/WhenThueMorsemeetsKochJan222005.pdf&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h4 id=&quot;ehrenfeucht-a--mycielski-j-1992-a-pseudorandom-sequence--how-random-is-it-the-american-mathematical-monthly-994-373-375-doi1023072324917&quot;&gt;&lt;em&gt;Ehrenfeucht, A., &amp;amp; Mycielski, J. (1992). A Pseudorandom Sequence–How Random Is It? The American Mathematical Monthly, 99(4), 373-375. doi:10.2307/2324917&lt;/em&gt;&lt;/h4&gt;
+</content>
+		</entry>
+	
+		<entry>
+			<title>Logical Consequence</title>
+			<link href="http://jessejenks.github.io/blog/2016/11/19/Logical-Consequence"/>
+			<updated>2016-11-19T00:00:00-08:00</updated>
+			<id>http://jessejenks.github.io//blog/2016/11/19/Logical-Consequence</id>
+			<content type="html">&lt;p&gt;This past summer I got to work with Professor Douglas Cannon to write a paper on John Etchemendy’s book, &lt;em&gt;The Concept of Logical Consequence&lt;/em&gt;. As soon as the school journal publishes it, a link to the paper will appear here.&lt;/p&gt;
+
+&lt;p&gt;In the early 20-th century, people like Hilbert wanted to secure a logical foundation for mathematics. Russell and Whitehead famously wrote &lt;em&gt;Principia Mathematica&lt;/em&gt; in which they attempted to axiomatize much of mathematics. They even have a proof that 1+1=2!&lt;/p&gt;
+
+&lt;p&gt;In the meantime, &lt;a href=&quot;/../../../../data/logic_poster.pdf&quot;&gt;here&lt;/a&gt; is a poster I made for the research symposium
+&lt;!-- ![Poster](/../../../../data/logic_poster.pdf) --&gt;
+&lt;!-- {:width=&quot;100%&quot;} --&gt;
+&lt;!-- ![](https://jessejenks.github.io/data/logic_poster.pdf ){:width=&quot;100%&quot;} --&gt;&lt;/p&gt;
+</content>
+		</entry>
+	
+		<entry>
+			<title>Continued Fractions</title>
+			<link href="http://jessejenks.github.io/blog/2016/11/16/Continued-Fractions"/>
+			<updated>2016-11-16T00:00:00-08:00</updated>
+			<id>http://jessejenks.github.io//blog/2016/11/16/Continued-Fractions</id>
+			<content type="html">&lt;p&gt;Welcome to my first ever blog post!
+Every since reading Silverman’s &lt;em&gt;A Friendly Introduction to Number Theory&lt;/em&gt;, I have been somewhat obsessed with continued fractions. Here is a slideshow I made for the ACM club on using continued fractions to store high precision. I wrote code for python and java but I also plan to implement Gosper’s algorithm to do arithmetic with continued fractions.&lt;/p&gt;
+
+&lt;iframe src=&quot;https://docs.google.com/presentation/d/1-TmhFQGjL59omLF0K89yh0RkPcxI2JkNjmjev9p5hoU/embed?start=false&amp;loop=false&amp;delayms=3000&quot; frameborder=&quot;0&quot; width=&quot;960&quot; height=&quot;569&quot; allowfullscreen=&quot;true&quot; mozallowfullscreen=&quot;true&quot; webkitallowfullscreen=&quot;true&quot;&gt;&lt;/iframe&gt;
+</content>
+		</entry>
+	
+
+</feed>
