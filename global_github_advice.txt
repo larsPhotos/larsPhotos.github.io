@@ -1,2 +1,0 @@
-change global github using:
-git remote set-url origin https://github.com/larsPhotos/larsPhotos.github.io
