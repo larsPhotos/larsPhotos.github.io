@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<head>
+<!-- <script src="../../../../js/d3.v4.min.js"></script> -->
+<script src="//d3js.org/d3.v3.min.js"></script>
+<script src="https://d3js.org/d3-color.v1.min.js"></script>
+<script src="https://d3js.org/d3-interpolate.v1.min.js"></script>
+<script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+<div></div>
+<style>
+/*path.link {
+	fill: none;
+	stroke:#666;
+}*/
+body {
+	background: #3288bd;
+}
+div.tooltip {	
+    position: absolute;			
+    text-align: center;			
+   /* width: 60px;					
+    height: 28px;				*/	
+    padding: 2px;				
+    /*font: 12px sans-serif;		*/
+    background: #fff;
+    fill: #fff;
+    border: 0px;		
+    border-radius: 8px;			
+    pointer-events: none;			
+}
+</style>
+</head>
+<body>
+<span>Memory</span><br>
+<input id="input-memory" type="text" name="mem" value="4"><br>
+<span>Strategy 1</span><br>
+<input id="input-strategy1" type="text" name="s1" value="-1"><br>
+<span>Strategy 2</span><br>
+<input id="input-strategy2" type="text" name="s2" value="-1"><br>
+<a id='link'>Download</a><br>
+<input type="submit" name="generate svg" value="gen svg" onclick="saveSVGelt()"><br><br>
+<input type="submit" name="run" value="Run" onclick="runSimulation()"><br><br>
+<input type="submit" onclick="clearDiv()" value="Clear"></input>
+<div id='simulation-container'></div>
+
+<script>
+
+var id_counter = -1;
+//ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddcccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+// ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddcccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+// 53168
+// 49913
+function saveSVGelt() {
+	// downloads the latest graph
+	let svelt = document.getElementById('svgelement_'+String(id_counter))
+	let serializer = new XMLSerializer();
+	let source = serializer.serializeToString(svelt)
+	//add name spaces.
+	if(!source.match(/^<svg[^>]+xmlns="http\:\/\/www\.w3\.org\/2000\/svg"/)){
+		source = source.replace(/^<svg/, '<svg xmlns="http://www.w3.org/2000/svg"');
+	}
+	if(!source.match(/^<svg[^>]+"http\:\/\/www\.w3\.org\/1999\/xlink"/)){
+		source = source.replace(/^<svg/, '<svg xmlns:xlink="http://www.w3.org/1999/xlink"');
+	}
+
+	//add xml declaration
+	source = '<?xml version="1.0" standalone="no"?>\r\n' + source;
+
+	//convert svg source to URI data scheme.
+	let url = "data:image/svg+xml;charset=utf-8,"+encodeURIComponent(source);
+
+	//set url value to a element's href attribute.
+	document.getElementById("link").href = url;
+}
+
+
+function clearDiv() {
+	console.log('clear was called')
+	let myDiv = document.getElementById('simulation-container');
+	while(myDiv.firstChild) {
+		myDiv.removeChild(myDiv.firstChild);
+	}
+}
+
+
+
+function runSimulation(){
+	id_counter++;
+	var w = 1000;
+	var h = 1000;
+
+	node_rad = 10;
+	font_s = 6;
+
+	// console.log()
+
+	var mem = parseInt(document.getElementById('input-memory').value);
+	if (isNaN(mem)) {
+		mem = 1;
+	}
+
+	var length_of_code = Math.pow(4,mem); // 2^(2*m)
+	// var num_possible_keys = Math.pow(2, length_of_code);
+	
+
+	var color_scale = d3.schemePastel1;
+
+	var node_labels = ['R', 'S', 'T', 'P'];
+
+	var encoding = {
+		'0':'c',
+		'1':'d'
+	}
+
+	var mapping = {
+		'cc':node_labels[0],
+		'cd':node_labels[1],
+		'dc':node_labels[2],
+		'dd':node_labels[3]
+	}
+
+
+	var nodes = [];
+
+	var edges = [];
+
+	var keys = [];
+
+
+	function encode(key) {
+		let new_key = []
+		for (let k in key) {
+			new_key.push(encoding[key[k]])
+		}
+		return new_key.join('')
+	}
+
+	for (let i = 0; i<length_of_code; i++) {
+		keys.push((i>>>0).toString(2));
+	}
+	for (let k in keys) {
+		while (keys[k].length< 2*mem) {
+			keys[k] = '0'+keys[k];
+		}
+		keys[k] = encode(keys[k])
+	}
+
+
+
+	// TODO: allow user to input string as strategy
+
+	var c1 = document.getElementById('input-strategy1').value
+	var parsed_c1 = parseInt(c1);
+
+	var c2 = document.getElementById('input-strategy2').value
+	var parsed_c2 = parseInt(c2);
+
+
+	var strat1 = isNaN(parsed_c1)? buildCustomStrategy(c1,false): buildStrategy(parsed_c1,false);
+	
+
+	var strat2 = isNaN(parsed_c2)? buildCustomStrategy(c2,true): buildStrategy(parsed_c2,true);
+
+	var force;
+	var path;
+	var node;
+	build(strat1, strat2);
+	force.on('tick',tick).start();
+
+
+	
+
+
+	function buildStrategy(code_num, opponent) {
+		// // Math.floor(Math.random()*Math.pow(2,length_of_code));
+		// // max = 2^(4^m);
+
+
+		let code_key;
+		if (code_num < 0) {
+			let arr = []
+			// code_key = ''
+			for (let i = 0; i<length_of_code; i++) {
+				if (Math.random() < 0.5) {
+					arr.push('c')
+				} else {
+					arr.push('d');
+				}
+			}
+			console.log(arr);
+			code_key = arr.join('');
+			console.log('code key')
+			console.log(code_key)
+		} else {
+			// // reverse so that code[i] is the 2^i place
+			code_key = (code_num >>> 0).toString(2);
+			// console.log(code_num+' in binary: '+code_key)
+		
+
+			while (code_key.length < length_of_code) {code_key = '0'+code_key;}
+
+			code_key = encode(code_key)
+
+			code_key = code_key.split('').reverse('').join('');
+
+			console.log('code key')
+			console.log(code_key)
+		}
+
+		let strat = {};
+
+		for (let k in keys) {
+			// console.log('k, coedes[')
+			// console.log(k)
+			// console.log(keys[k])
+			// console.log('')
+			let temp_k;
+
+			if (opponent) {
+				temp_k = keys[k].split('');
+				for (let i = 0; i<temp_k.length/2; i++) {
+					let temp = temp_k[i*2];
+					temp_k[i*2] = temp_k[i*2+1];
+					temp_k[i*2+1] = temp;
+				}
+
+				temp_k = temp_k.join('');
+
+				// console.log('temp_k')
+				// console.log(temp_k)
+
+			} else {
+				temp_k = keys[k];
+			}
+
+			console.log(temp_k)
+
+			strat[temp_k] = code_key[k];
+		} 
+		console.log(strat)
+
+
+		console.log(code_key.split('').reverse('').join(''))
+		return strat;
+	}
+
+	function buildCustomStrategy(code_str, opponent) {
+
+		console.log(code_str)
+		// // Math.floor(Math.random()*Math.pow(2,length_of_code));
+		// // max = 2^(4^m);
+
+		code_key = code_str.split('').reverse('').join('');
+
+		// console.log(code_key)
+		let strat = {};
+
+		for (let k in keys) {
+
+			let temp_k;
+			// console.log('keys = '+k)
+			if (opponent) {
+				temp_k = keys[k].split('');
+				for (let i = 0; i<temp_k.length/2; i++) {
+					let temp = temp_k[i*2];
+					temp_k[i*2] = temp_k[i*2+1];
+					temp_k[i*2+1] = temp;
+				}
+
+				temp_k = temp_k.join('');
+
+				// console.log(temp_k)
+
+			} else {
+				temp_k = keys[k];
+			}
+
+			strat[temp_k] = code_key[k];
+			// strat[keys[k]] = code_key[k];
+
+		} 
+		console.log(strat)
+
+		return strat;
+	}
+
+
+
+	// console.log(keys);
+
+
+	function build(strategy1, strategy2) {
+		// // var angle = 0;
+		var angle_offset = 2.0*Math.PI/length_of_code;
+		var offset_radius = 400;
+
+		for (let i = 0; i<length_of_code; i++) {
+			nodes.push({
+				id: 	node_labels[i%4],//keys[i],//
+				code: 	keys[i],
+				x: 		w/2 + offset_radius*Math.cos(i*angle_offset),
+				y: 		h/2 + offset_radius*Math.sin(i*angle_offset)
+			});
+		}
+
+		// console.log(nodes);
+
+		// console.log(c1);
+		// console.log(strat1);
+		// console.log(c2);
+		// console.log(strat2);
+
+		let nxt;
+		// for (let s in strat1) {
+		for (let s of keys) {
+			// s = keys[c]
+			nxt = strategy1[s]+strategy2[s]
+			if (mem > 1) {
+				edges.push({
+					source: keys.indexOf(s),
+					target: keys.indexOf(s.substring(2,s.length)+nxt)
+				});
+			} else {
+				edges.push({
+					source: keys.indexOf(s),
+					target: keys.indexOf(nxt)
+				});
+			}
+		}
+
+		// // show code on hover
+		// // used in node.on('mouseover', function(d){...})
+		// var div = d3.select('body')
+		var div = d3.select('#simulation-container')
+					.append('div')
+					.attr('class', 'tooltip')
+					.style('opacity', 0);
+
+
+		// var svg = d3.select('body')
+		var svg = d3.select('#simulation-container')
+			.append('svg')
+			.attr('id','svgelement_'+String(id_counter))
+			.attr({
+				'width':w,
+				'height':h
+			})
+			// id_counter++;
+	// 		.call(zoom);
+
+	// function zoomed() {
+	//   svg.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
+	// }
+
+		// code_key = code_key.split('').reverse('').join('');
+
+		// console.log(code_key)
+
+		svg.append('text')
+			.attr('x', 50)
+			.attr('y', 20)
+			.attr('dy', '0em')
+			.text(c1+' vs '+c2);
+
+		svg.append('text')
+			.attr('x', 50)
+			.attr('y', 20)
+			.attr('dy','1.5em')
+			.text('memory: '+mem);
+
+		var bin1;
+		var bin2;
+
+		if (c1<0) {
+			bin1 = Object.values(strategy1).join('');
+		} else {
+			bin1 = (c1 >>> 0).toString(2);
+		}
+
+		if (c2<0) {
+			bin2 = Object.values(strategy2).join('');
+		} else {
+			bin2 = (c2 >>> 0).toString(2);
+		}
+
+		while (bin1.length < length_of_code) {bin1 = '0'+bin1};
+		while (bin2.length < length_of_code) {bin2 = '0'+bin2};
+
+		// let hamming_distance = 0;
+		// for (let c in bin1) {
+		// 	if (bin1[c] !== bin2[c]) {
+		// 		hamming_distance++;
+		// 	}
+		// }
+
+		// let alt_hamming_distance = 0;
+		// let bin3 = ''
+		// let temp_k = bin2.split('');
+		// for (let i = 0; i<temp_k.length/2; i++) {
+		// 	let temp = temp_k[i*2];
+		// 	temp_k[i*2] = temp_k[i*2+1];
+		// 	temp_k[i*2+1] = temp;
+		// }
+
+		// bin3 = temp_k.join('');
+
+		// for (let c in bin1) {
+		// 	if (bin1[c] !== bin3[c]) {
+		// 		alt_hamming_distance++;
+		// 	}
+		// }
+
+
+		svg.append('text')
+			.attr('x', 50)
+			.attr('y', 20)
+			.attr('dy', '3em')
+			.text(bin1);
+		svg.append('text')
+			.attr('x', 50)
+			.attr('y', 20)
+			.attr('dy', '4.5em')
+			.text(bin2);
+
+		// svg.append('text')
+		// 	.attr('x', 50)
+		// 	.attr('y', 20)
+		// 	.attr('dy', '6em')
+		// 	.text(hamming_distance+'        hamming distance');
+		
+		// svg.append('text')
+		// 	.attr('x', 50)
+		// 	.attr('y', 20)
+		// 	.attr('dy', '7.5em')
+		// 	.text(alt_hamming_distance+'        alt hamming distance');
+			// .text('rule: '+code_num+' → '+code_key);
+		// svg.append('text')
+		// 	.attr('x', 50)
+		// 	.attr('y', 20)
+		// 	.attr('dy','3em')
+		// 	.text('')
+			// .text('S < P < R < T');
+
+		force = d3.layout.force()
+			.nodes(nodes)
+			.links(edges)
+			.size([w,h])
+			// .linkDistance(80)
+			.linkDistance(50)
+			.charge(-400)
+			.gravity(0.5);
+			// .gravity(0)
+			// .on('tick', tick)
+			// .start();
+
+
+		// // var test_circle = svg.selectAll('.randomCircle')
+		// // 	.data([1,2,3,4,5,6])
+		// // 	.enter().append('g')
+		// // 	.attr('class', 'randomCircle');
+
+		// // test_circle.append('circle')
+		// // 	.attr('r', 100)
+		// // 	.attr('x', w/2)
+		// // 	.attr('y', h/2)
+		// // 	.attr('fill', 'black')
+			
+
+
+
+		// // Arrowtips
+		svg.append('svg:defs').selectAll('marker')
+			.data(['end'])
+			.enter().append('svg:marker')
+			.attr('id', String)
+			.attr('viewBox', '0 -5 10 10')
+			.attr('refX', 0)//, 30)
+			.attr('refY', 0)//, -0.6)
+			.attr('markerWidth', 6)
+			.attr('markerHeight', 6)
+			.attr('xoverflow','visible')
+			.attr('orient', 'auto')
+			.attr('fill','#fff')
+			.append('svg:path')
+			.attr('d', "M0,-5L10,0L0,5");
+
+		path = svg.append("svg:g").selectAll("path")
+			.data(force.links())
+			.enter().append("svg:path")
+			.attr("id", function(d, i) { return "edgepath" + i;})
+			.attr("class", "link")
+			.attr("fill","none")
+			.attr("stroke","#fff")
+			.attr("marker-end", "url(#end)");
+
+		// var edgelabels = svg.selectAll(".edgelabel")
+		// 	.data(edges)
+		// 	.enter()
+		// 	.append('text')
+		// 	.style("pointer-events", "none")
+		// 	.attr('class','edgelabel')
+		// 	// .attr('id', function (d, i) {return 'edgelabels' + i;})
+		// 	.attr('font-size', 14)
+		// 	.attr('fill','#888');
+
+		// edgelabels.append('textPath')
+		// 	.attr('xlink:href', function (d, i) {return '#edgepath' + i;})
+		// 	.style("text-anchor", "middle")
+		// 	.style("pointer-events", "none")
+		// 	.attr("startOffset", "50%")
+		// 	.text(function (d) {return d.label});
+		// 	// .text(function(d){if (d.label === '0'){return 'c'} else {return 'd'}});
+
+
+		node = svg.selectAll(".node")
+			.data(force.nodes())
+			.enter().append("g")
+			.attr("class", "node")
+			.call(force.drag);
+
+		node.append('circle')
+			.attr('r',node_rad)
+			.attr('fill','#fff')
+			// .attr('stroke', '#000')
+			.attr('stroke', function(d) {
+				return color_scale[
+					node_labels.indexOf(mapping[d.code.substring(d.code.length-2,d.code.length)])
+				]
+				// return color_scale[parseInt(d.code.substring(d.code.length-2,d.code.length), 2)];
+				// if (parseInt( === 0) {
+				// 	return "#f00";
+				// } else {
+				// 	return "#000";
+				// }
+			})
+			.attr('stroke-width', 3)
+			// .attr('stroke-opacity', 0.8)
+			// .on('mouseover', function(d) {
+			// 	div.transition()
+			// 		.duration(100)
+			// 		.style('opacity', .9);
+			// 	div.html(d.code+" ")
+			// 	.style("left", (d3.event.pageX) + "px")		
+			// 	.style("top", (d3.event.pageY - 28) + "px");	
+			// })
+			// .on('mouseout', function(d) {
+			// 	div.transition()
+			// 		.duration(100)
+			// 		.style('opacity', 0);
+			// });
+
+
+		node.append('text')
+			// .text(node=>node.id)
+			.text(function(d) {
+				lab = ''
+				for (let i = 0; i<d.code.length/2; i++) {
+					lab += mapping[d.code[2*i]+d.code[2*i+1]];
+				}
+				return lab;
+			})
+			// .text(function(d) {
+			// 	let out = [];
+			// 	let n_id = d.id;
+			// 	let sub = '';
+			// 	for (let i = 0; i<mem; i++) {
+			// 		sub = n_id.substring(2*i, 2*i+2);
+			// 		if (sub == '00') out.push('R');
+			// 		else if (sub == '01') out.push('S');
+			// 		else if (sub == '10') out.push('T');
+			// 		else if (sub == '11') out.push('P');
+			// 	}
+
+			// 	return out.join('');
+			// })
+			.attr('fill', "#666")
+			.attr('text-anchor', 'middle')
+			.attr('dy', font_s/2-1)
+			.attr('font-size', font_s)
+			.style("pointer-events", "none");
+
+			// saveSVGelt(svg, 'test.svg');
+		}
+
+	function tick() {
+		path.attr("d", function(d) {
+			var dx = d.target.x - d.source.x,
+				dy = d.target.y - d.source.y;
+
+			if (dx == 0 && dy == 0) {
+				// return "M" + d.source.x + "," + d.source.y + "A" + 10 + ',' + 10 + ' 0 1, 1 ' + 
+				// (d.target.x+50) + "," + (d.target.y+50);
+				
+
+				var theta = Math.atan2(d.source.y-h/2,d.source.x-w/2);
+
+				return "M" + d.source.x + "," + d.source.y + "C" + 
+				(d.source.x+100*Math.cos(theta+Math.PI/4)) + "," + (d.source.y+100*Math.sin(theta+Math.PI/4)) + "," + 
+				(d.source.x+100*Math.cos(theta-Math.PI/4)) + "," + (d.source.y+100*Math.sin(theta-Math.PI/4)) + "," + 
+				d.target.x + "," + d.target.y;
+			} else {
+				var dr = 2*Math.sqrt(dx * dx + dy * dy);
+				return "M" + d.source.x + "," + d.source.y + "A" + dr + "," + dr + " 0 0, 1 " + d.target.x + "," + d.target.y;
+			}
+		});
+
+		path.attr("d", function(d) {
+			var p1 = this.getTotalLength(),
+			r = node_rad+8.49;
+			var m;
+			if (d.source.x-d.target.x===0&&d.source.y-d.target.y===0) {
+				m = this.getPointAtLength(p1-r);
+				var theta = Math.atan2(d.source.y-h/2,d.source.x-w/2);
+
+				return "M" + d.source.x + "," + d.source.y + "C" + 
+				(d.source.x+100*Math.cos(theta+Math.PI/4)) + "," + (d.source.y+100*Math.sin(theta+Math.PI/4)) + "," + 
+				(d.source.x+100*Math.cos(theta-Math.PI/4)) + "," + (d.source.y+100*Math.sin(theta-Math.PI/4)) + "," + 
+				m.x + "," + m.y;
+			} else {
+				m = this.getPointAtLength(p1-r);
+
+				var dx = m.x - d.source.x,
+				dy = m.y - d.source.y,
+				dr = 2*Math.sqrt(dx*dx + dy*dy);
+
+				return "M" + d.source.x + "," + d.source.y + "A" + dr + "," + dr + " 0 0,1 " + m.x + "," + m.y;
+			}
+		});
+
+		node.attr("transform", function(d) { 
+			return "translate(" + d.x + "," + d.y + ")";
+		});
+
+		// node.attr('cx', function(d){return d.x;})
+		// 	.attr('cy', function(d){return d.y;})
+
+		// edgelabels.attr('transform', function (d) {
+		// 	if (d.target.x < d.source.x) {
+		// 		var bbox = this.getBBox();
+
+		// 		rx = bbox.x + bbox.width / 2;
+		// 		ry = bbox.y + bbox.height / 2;
+		// 		return 'rotate(180 ' + rx + ' ' + ry + ')';
+		// 	} else {
+		// 		return 'rotate(0)';
+		// 	}
+		// });
+	}
+}
+</script>
+</body>
