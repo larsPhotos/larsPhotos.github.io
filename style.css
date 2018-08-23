@@ -1,0 +1,118 @@
+body, html {
+    height: 100%;
+    margin: 0;
+    cursor: auto;
+}
+
+.background {
+    background-color: black;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    max-width: 100%;
+    max-height: 100%;
+    margin: auto;
+    overflow: auto;
+    z-index: -2; /* move to back */
+
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.photo {
+    /*background-image: url("photos/IMG_3826-Edit-Edit-2-1.jpg");*/
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 100%;
+    max-height: 100%;
+    margin: auto;
+    overflow: auto;
+    z-index: -1; /* move to back */
+}
+
+.text-block {
+    background-color: black;
+    color: white;
+    padding-left: 20px;
+    padding-right: 20px;
+    /*opacity: 1;*/
+    text-align: center;
+    font: 14px arial, sans-serif;
+    
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+@-webkit-keyframes fadeOut {
+    0% {opacity: 1;}
+    100% {opacity: 0;}
+}
+
+@keyframes fadeOut {
+    0% {opacity: 1;}
+    100% {opacity: 0;}
+}
+
+.fadeOut {
+    -webkit-animation-duration: 6;
+    animation-duration: 6s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+    -webkit-animation-name: fadeOut;
+    animation-name: fadeOut;
+    animation-delay: 3s; 
+}
+
+.top-right {
+    position: absolute;
+    top: 8px;
+    right: 16px;
+    z-index: 1;
+}
+ 
+.arrow_keys_description {
+    position: fixed;
+    right: 50%;
+    top: 37%;
+    transform: translate(-50%, -35%);
+    font: 18px arial, sans-serif;
+    color: white;
+    text-shadow: 1px 1px black;   
+    z-index: 1;
+}
+
+.arrows {
+    position: fixed;
+    border: none;
+    outline: none;
+    color: white;
+    top: 50%;
+    /*background-color: black;*/
+    background-color: rgba(0, 0, 0, 0);
+    /*padding: 5px 10px;*/
+    /*font-size: 112px;*/
+    font: 52px arial, sans-serif;
+    cursor: pointer;
+    /*opacity: .1;*/
+    text-shadow: 1px 1px red;
+}
+
+.left_arrow {
+    left: 3%;
+}
+
+.right_arrow {
+    right: 3%;
+}
+
+.arrows:hover {
+    color: red;
+}
