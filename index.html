@@ -6,6 +6,7 @@
 body, html {
     height: 100%;
     margin: 0;
+    cursor: auto;
 }
 
 .background {
@@ -45,16 +46,34 @@ body, html {
     color: white;
     padding-left: 20px;
     padding-right: 20px;
-    opacity: 1;
+    /*opacity: 1;*/
     text-align: center;
     font: 14px arial, sans-serif;
-}
-
-.banner {
+    
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+}
+
+@-webkit-keyframes fadeOut {
+    0% {opacity: 1;}
+    100% {opacity: 0;}
+}
+
+@keyframes fadeOut {
+    0% {opacity: 1;}
+    100% {opacity: 0;}
+}
+
+.fadeOut {
+    -webkit-animation-duration: 6;
+    animation-duration: 6s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+    -webkit-animation-name: fadeOut;
+    animation-name: fadeOut;
+    animation-delay: 3s; 
 }
 
 .top-right {
@@ -105,7 +124,7 @@ body, html {
 
 </style>
 </head>
-<body>
+<body id="body">
 
 
 <div class="background"></div>
@@ -114,12 +133,12 @@ body, html {
 
 <div class="top-right">Title</div>
 
-<div class="text-block banner">
-    <header id="text">
+<div id="title" class="text-block fadeOut">
+    <p>
         <h1>
             lars.photos
         </h1>
-    </header>
+    </p>
 </div>
 
 <button class="arrows left_arrow" onclick="previous()">&#8249;</button>
@@ -129,7 +148,12 @@ body, html {
 
 var photos = ["photos/IMG_3826-Edit-Edit-2-1.jpg", "photos/IMG_2710-3-Edit-4-Edit-1.jpg", "photos/IMG_2726-1.jpg"];
 
+// var titles = []; // 
+// var descriptions = []; // get descriptions from text files
+
 var current = 0;
+
+document.getElementById("photo").src = photos[current];
 
 function checkKeycode(event) {
     // handling Internet Explorer stupidity with window.event
@@ -155,11 +179,46 @@ function next() {
     document.getElementById("photo").src = photos[current];
 }
 
-document.getElementById("photo").src = photos[current];
+
+// moving mouse controls showing and hiding
+
+var mouseTimer = null, cursorVisible = true;
+
+function hideElements() {
+    // console.log("hiding elements!");
+    mouseTimer = null;
+    document.body.style.cursor = "none";
+    cursorVisible = false;
+    arrowsOpacity(0);
+}
+
+function showElements(){
+    if (mouseTimer) {
+        window.clearTimeout(mouseTimer);
+    }
+    if (!cursorVisible) {
+        // console.log("showing elements!");
+        document.body.style.cursor = "default";            
+        cursorVisible = true;
+        arrowsOpacity(1);
+    }
+    mouseTimer = window.setTimeout(hideElements, 5000);
+};
+
+function arrowsOpacity(opacity) {
+    var arrows = document.getElementsByClassName("arrows");
+    for (var i = 0; i < arrows.length; i++) {
+        arrows[i].style.opacity = opacity;
+    }
+}
 
 document.onkeydown = checkKeycode;
 
-document.getElementById("description").styledocument.getElementById("photo").width;
+document.onmousemove = showElements;
+
+showElements;
+
+// document.getElementById("description").styledocument.getElementById("photo").width;
 
 </script>
 
