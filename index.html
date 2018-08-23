@@ -1,17 +1,167 @@
----
-layout: default
-title: Jesse Jenks
----
-<!-- P5.js -->
-<script src="/js/libraries/p5.js" type="text/javascript"></script>
-<script src="../../../../js/libraries/p5.dom.js" type="text/javascript"></script>
-<script src="/js/automata.js"></script>
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body, html {
+    height: 100%;
+    margin: 0;
+}
 
-<div class="blurb">
-	<p style="display: flex;justify-content: center;text-align: center;">Jesse Endo Jenks</p>
-</div><!-- /.blurb -->
-<div id="automata"></div>
-<div id="name_of_rule" style="display: flex;justify-content: center;text-align: center;"></div>
-<div style="display: flex;justify-content: center;text-align: center;">Use left and right arrows to change rules, press 'r' to reset, and 'p' to pause</div>
-<div style="display: flex;justify-content: center;text-align: center;">More info&nbsp;<a href="../about">here</a></div>
-<br>
+.background {
+    background-color: black;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    max-width: 100%;
+    max-height: 100%;
+    margin: auto;
+    overflow: auto;
+    z-index: -2; /* move to back */
+
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.photo {
+    /*background-image: url("photos/IMG_3826-Edit-Edit-2-1.jpg");*/
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 100%;
+    max-height: 100%;
+    margin: auto;
+    overflow: auto;
+    z-index: -1; /* move to back */
+}
+
+.text-block {
+    background-color: black;
+    color: white;
+    padding-left: 20px;
+    padding-right: 20px;
+    opacity: 1;
+    text-align: center;
+    font: 14px arial, sans-serif;
+}
+
+.banner {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.top-right {
+    position: absolute;
+    top: 8px;
+    right: 16px;
+    z-index: 1;
+}
+ 
+.arrow_keys_description {
+    position: fixed;
+    right: 50%;
+    top: 37%;
+    transform: translate(-50%, -35%);
+    font: 18px arial, sans-serif;
+    color: white;
+    text-shadow: 1px 1px black;   
+    z-index: 1;
+}
+
+.arrows {
+    position: fixed;
+    border: none;
+    outline: none;
+    color: white;
+    top: 50%;
+    /*background-color: black;*/
+    background-color: rgba(0, 0, 0, 0);
+    /*padding: 5px 10px;*/
+    /*font-size: 112px;*/
+    font: 52px arial, sans-serif;
+    cursor: pointer;
+    /*opacity: .1;*/
+    text-shadow: 1px 1px red;
+}
+
+.left_arrow {
+    left: 3%;
+}
+
+.right_arrow {
+    right: 3%;
+}
+
+.arrows:hover {
+    color: red;
+}
+
+</style>
+</head>
+<body>
+
+
+<div class="background"></div>
+
+<img id="photo" class="photo">
+
+<div class="top-right">Title</div>
+
+<div class="text-block banner">
+    <header id="text">
+        <h1>
+            lars.photos
+        </h1>
+    </header>
+</div>
+
+<button class="arrows left_arrow" onclick="previous()">&#8249;</button>
+<button class="arrows right_arrow" onclick="next()">&#8250;</button>
+
+<script>
+
+var photos = ["photos/IMG_3826-Edit-Edit-2-1.jpg", "photos/IMG_2710-3-Edit-4-Edit-1.jpg", "photos/IMG_2726-1.jpg"];
+
+var current = 0;
+
+function checkKeycode(event) {
+    // handling Internet Explorer stupidity with window.event
+    // @see http://stackoverflow.com/a/3985882/517705
+    var keyDownEvent = event || window.event,
+        keycode = (keyDownEvent.which) ? keyDownEvent.which : keyDownEvent.keyCode;
+    if (keycode == 37) { // left arrow
+        previous();
+    } else if (keycode == 39) { // right arrow
+        next();
+    }
+}
+
+function previous() {
+    current = current === 0 ? photos.length - 1 : current - 1;
+    console.log("left pressed");
+    document.getElementById("photo").src = photos[current];      
+}
+
+function next() {
+    console.log("next presoed");
+    current = current == photos.length - 1 ? 0 : current + 1;
+    document.getElementById("photo").src = photos[current];
+}
+
+document.getElementById("photo").src = photos[current];
+
+document.onkeydown = checkKeycode;
+
+document.getElementById("description").styledocument.getElementById("photo").width;
+
+</script>
+
+</body>
+</html>
