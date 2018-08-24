@@ -3,29 +3,31 @@
 
 var current = 0, mouseTimer = null, cursorVisible = true;
 
-var photos = ["photos/IMG_3826-Edit-Edit-2.jpg", 
-    "photos/IMG_3158-Edit-2.jpg", 
-    "photos/IMG_4339.jpg", 
-    "photos/IMG_2675-Edit.jpg",
-    "photos/IMG_2231-Edit-Edit.jpg",
-    "photos/IMG_2802.jpg",
-    "photos/IMG_4676-Edit.jpg",
-    "photos/IMG_4513-Edit.jpg",
-    "photos/IMG_2600-Edit-2.jpg",
-    "photos/IMG_3310-Edit.jpg",
-    "photos/IMG_2112-Edit.jpg",
-    "photos/IMG_3682-Edit-3.jpg",
-    "photos/IMG_3376-Edit.jpg",
-    "photos/IMG_3802-Edit-2.jpg",
-    "photos/IMG_3043-Edit-2-Edit.jpg",
-    "photos/IMG_2726.jpg",
-    "photos/IMG_2123-Edit-2.jpg",
-    "photos/IMG_0905.jpg",
-    "photos/IMG_3136-Edit-Edit.jpg",
-    "photos/IMG_2552-Edit-Edit.jpg",
-    "photos/IMG_1900.jpg"];
+var photos = 
+    ["IMG_3826-Edit-Edit-2.jpg", 
+    "IMG_3158-Edit-2.jpg", 
+    "IMG_4339.jpg", 
+    "IMG_2675-Edit.jpg",
+    "IMG_2231-Edit-Edit.jpg",
+    "IMG_2802.jpg",
+    "IMG_4676-Edit.jpg",
+    "IMG_4513-Edit.jpg",
+    "IMG_2600-Edit-2.jpg",
+    "IMG_3310-Edit.jpg",
+    "IMG_2112-Edit.jpg",
+    "IMG_3682-Edit-3.jpg",
+    "IMG_3376-Edit.jpg",
+    "IMG_3802-Edit-2.jpg",
+    "IMG_3043-Edit-2-Edit.jpg",
+    "IMG_2726.jpg",
+    "IMG_2123-Edit-2.jpg",
+    "IMG_0905.jpg",
+    "IMG_3136-Edit-Edit.jpg",
+    "IMG_2552-Edit-Edit.jpg",
+    "IMG_1900.jpg"];
 
-var titles = ["slenderman in motion",
+var titles = 
+    ["slenderman in motion",
     "voyage", 
     "unedited", 
     "edited",
@@ -47,7 +49,8 @@ var titles = ["slenderman in motion",
     "corbett house",
     "the sculptor"];
 
-var metadata = ["1/26/15 10:24:18 PM<br>30.0 sec at f/8.0, ISO 100<br>18mm (EF-S18-55mm f/3.5-5.6 IS II)",
+var metadata = 
+    ["1/26/15 10:24:18 PM<br>30.0 sec at f/8.0, ISO 100<br>18mm (EF-S18-55mm f/3.5-5.6 IS II)",
     "1/6/15 6:36 PM<br>1/100 sec at f/5.6, ISO 400<br>250mm (EF-S55-250mm f/4-5.6 IS II)",
     "4/19/15 7:01 AM<br>1/320 sec at f/13, ISO 100<br>250mm (EF-S55-250mm f/4-5.6 IS II)", 
     "11/6/14 9:54 PM<br>1/60 sec at f/13, ISO 100<br>250mm (EF-S55-250mm f/4-5.6 IS II)",
@@ -70,7 +73,8 @@ var metadata = ["1/26/15 10:24:18 PM<br>30.0 sec at f/8.0, ISO 100<br>18mm (EF-S
      "8/5/14 2:31 PM<br>1/80 sec at f/5.6, ISO 400<br>24mm (EF-S18-55mm f/3.5-5.6 IS II)"];
 
 function update() {
-    document.getElementById("photo").src = photos[current];
+    document.getElementById("photo").src = "photos/lo-rez/" + photos[current];
+    document.getElementById("photo").src = "photos/hi-rez/" + photos[current];
     document.getElementById("title").innerHTML = titles[current];
     document.getElementById("metadata").innerHTML = metadata[current];
 }
