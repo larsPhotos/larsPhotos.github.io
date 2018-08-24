@@ -6,7 +6,7 @@ var current = 0, mouseTimer = null, cursorVisible = true;
 var photos = ["photos/IMG_3826-Edit-Edit-2.jpg", 
     "photos/IMG_3158-Edit-2.jpg", 
     "photos/IMG_4339.jpg", 
-    "photos/IMG_2675-Edit-1.jpg",
+    "photos/IMG_2675-Edit.jpg",
     "photos/IMG_2231-Edit-Edit.jpg",
     "photos/IMG_2802.jpg",
     "photos/IMG_4676-Edit.jpg",
@@ -105,7 +105,7 @@ function mouseMoved(){
     if (!cursorVisible) {
         showElements();
     }
-    mouseTimer = window.setTimeout(hideElements, 4000);
+    mouseTimer = window.setTimeout(hideElements, 2000);
 };
 
 // handling Internet Explorer stupidity with window.event
