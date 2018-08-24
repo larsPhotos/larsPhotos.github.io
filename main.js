@@ -149,7 +149,7 @@ showElements();
 
 mouseMoved();
 
-window.setTimeout(hideBanner, 4000);
+window.setTimeout(hideBanner, 2000);
 
 function hideBanner() {
     document.getElementById("banner").className = "text-block banner hidden";
