@@ -26,8 +26,8 @@ body, html {
 .photo {
     /*background-image: url("photos/IMG_3826-Edit-Edit-2-1.jpg");*/
     position: fixed;
-    top: 50%;
     left: 50%;
+    top: 50%;
     transform: translate(-50%, -50%);
     max-width: 100%;
     max-height: 100%;
@@ -41,14 +41,47 @@ body, html {
     color: white;
     padding-left: 20px;
     padding-right: 20px;
-    /*opacity: 1;*/
     text-align: center;
+}
+
+.banner {
     font: 14px arial, sans-serif;
-    
     position: absolute;
-    top: 50%;
     left: 50%;
+    top: 50%;
     transform: translate(-50%, -50%);
+}
+
+.outline-text {
+    text-shadow:
+        -1px -1px 0 #000,
+        1px -1px 0 #000,
+        -1px 1px 0 #000,
+        1px 1px 0 #000;
+    color: white;
+    position: absolute;
+}
+
+#title {
+    font-family: 'Open Sans Condensed';
+    font-size: 50px;
+    left: 50%;
+    top: 20%;
+    transform: translate(-50%, -20%);
+}
+
+#description {
+    font: 20px courier, sans-serif;
+    left: 80%;
+    bottom: 20%;
+    transform: translate(-80%, -20%);
+}   
+
+#metadata {
+    font: 20px courier, sans-serif;
+    left: 20%;
+    bottom: 20%;
+    transform: translate(-20%, -20%);
 }
 
 @-webkit-keyframes fadeOut {
@@ -75,17 +108,6 @@ body, html {
     position: absolute;
     top: 8px;
     right: 16px;
-    z-index: 1;
-}
- 
-.arrow_keys_description {
-    position: fixed;
-    right: 50%;
-    top: 37%;
-    transform: translate(-50%, -35%);
-    font: 18px arial, sans-serif;
-    color: white;
-    text-shadow: 1px 1px black;   
     z-index: 1;
 }
 
