@@ -77,12 +77,13 @@ function update() {
         mouseMoved();
     }
     document.getElementById("photo").src = "photos/lo-rez/" + photos[current];
-    document.getElementById("photo").src = "photos/hi-rez/" + photos[current];
+    
     document.getElementById("title").innerHTML = titles[current];
     document.getElementById("metadata").innerHTML = metadata[current];
     document.getElementById("title-box").innerHTML = titles[current];
     document.getElementById("metadata-box").innerHTML = metadata[current];
     document.getElementById("index").innerHTML = (current + 1) + "/" + photos.length;
+    document.getElementById("photo").src = "photos/hi-rez/" + photos[current];
     // document.getElementById("index-box").innerHTML = (current + 1) + "/" + photos.length;
 }
 
