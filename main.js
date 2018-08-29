@@ -73,6 +73,9 @@ var metadata =
     "August 5, 2014 2:31 PM<br>1/80 sec at f/5.6 ISO 400"];
 
 function update() {
+    if (cursorVisible) {
+        mouseMoved();
+    }
     document.getElementById("photo").src = "photos/lo-rez/" + photos[current];
     document.getElementById("photo").src = "photos/hi-rez/" + photos[current];
     document.getElementById("title").innerHTML = titles[current];
@@ -80,21 +83,20 @@ function update() {
     document.getElementById("title-box").innerHTML = titles[current];
     document.getElementById("metadata-box").innerHTML = metadata[current];
     document.getElementById("index").innerHTML = (current + 1) + "/" + photos.length;
-    document.getElementById("index-box").innerHTML = (current + 1) + "/" + photos.length;
+    // document.getElementById("index-box").innerHTML = (current + 1) + "/" + photos.length;
 }
 
 function hideElements() {
-    console.log("hiding elements!");
+    // console.log("hiding elements!");
     mouseTimer = null;
     document.getElementById("left-arrow").className = "arrows left_arrow hidden";
     document.getElementById("right-arrow").className = "arrows right_arrow hidden";
-    // document.getElementById("title").className = "text-block hidden";
-    document.getElementById("title").className = "outline-text title hidden";
+    document.getElementById("title").className = "text-block title hidden";
     document.getElementById("metadata").className = "outline-text metadata hidden";
     document.getElementById("title-box").className = "text-box title hidden";
     document.getElementById("metadata-box").className = "text-box metadata hidden";
     document.getElementById("index").className = "outline-text index hidden";
-    document.getElementById("index-box").className = "text-box index hidden";
+    // document.getElementById("index-box").className = "text-box index hidden";
     setTimeout(function(){
         document.body.style.cursor = "none";
         cursorVisible = false;
@@ -102,16 +104,15 @@ function hideElements() {
 }
 
 function showElements() {
-    console.log("showing elements!");
+    // console.log("showing elements!");
     document.getElementById("left-arrow").className = "arrows left_arrow";
     document.getElementById("right-arrow").className = "arrows right_arrow";
-    // document.getElementById("title").className = "text-block";
-    document.getElementById("title").className = "outline-text title";
+    document.getElementById("title").className = "text-block title";
     document.getElementById("metadata").className = "outline-text metadata";
     document.getElementById("title-box").className = "text-box title";
     document.getElementById("metadata-box").className = "text-box metadata";
     document.getElementById("index").className = "outline-text index";
-    document.getElementById("index-box").className = "text-box index";
+    // document.getElementById("index-box").className = "text-box index";
     document.body.style.cursor = "default";
     cursorVisible = true;
 }
@@ -130,11 +131,9 @@ function mouseMoved(){
 // handling Internet Explorer stupidity with window.event
 // @see http://stackoverflow.com/a/3985882/517705    
 function checkKeycode(event) {
-    // window.clearTimeout(mouseTimer);
     window.clearTimeout(mouseTimer);
     if (cursorVisible) {
         mouseMoved();
-        console.log("was the mouse moved?");
     }
     var keyDownEvent = event || window.event,
         keycode = (keyDownEvent.which) ? keyDownEvent.which : keyDownEvent.keyCode;
@@ -148,7 +147,6 @@ function checkKeycode(event) {
 function previous() {
     current = current === 0 ? photos.length - 1 : current - 1;
     update();      
-    document.body.style.cursor = "default";
 }
 
 function next() {
