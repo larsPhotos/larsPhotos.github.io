@@ -36,12 +36,24 @@ body, html {
     z-index: -1; /* move to back */
 }
 
+.text-box {
+    position: absolute;
+    background-color: black;
+    color: black;
+    padding-left: 20px;
+    padding-right: 20px;
+    /*text-align: center;*/
+    opacity: .5;
+}
+
 .text-block {
+    position: absolute;
     background-color: black;
     color: white;
     padding-left: 20px;
     padding-right: 20px;
     text-align: center;
+    /*opacity: 1;*/
 }
 
 .banner {
@@ -53,28 +65,46 @@ body, html {
 }
 
 .outline-text {
+    text-align: center;
     text-shadow:
         -1px -1px 0 #000,
         1px -1px 0 #000,
         -1px 1px 0 #000,
-        2px 2px 0 #000;
+        1px 1px 0 #000;
     color: white;
     position: absolute;
 }
 
-#title {
-    font-family: 'Open Sans Condensed';
+.title {
+
+    /*font-family: 'Open Sans Condensed';*/
+    /*bebas*/
+    /*font-family: times;*/
+    font-family: 'BebasNeueRegular';
+    /*fon*/
+    /*font-family: 'BebasNeueLight'; */
+    font-weight: normal;
+    /*font-weight: lighter; */
+   font-style: normal;
     font-size: 72px;
     left: 51%;
     top: 31%;
     transform: translate(-51%, -31%);
 }
 
-#metadata {
+.metadata {
     font: 25px courier, sans-serif;
-    left: 25%;
-    bottom: 25%;
-    transform: translate(-25%, -25%);
+    left: 20%;
+    bottom: 20%;
+    transform: translate(-20%, -20%);
+}
+
+.index {
+    font: 25px courier, sans-serif;
+    left: 80%;
+    bottom: 20%;
+    transform: translate(-80%, -20%);   
+    
 }
 
 .hidden {
