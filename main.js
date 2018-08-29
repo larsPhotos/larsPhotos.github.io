@@ -50,8 +50,7 @@ var titles =
     "the sculptor"];
 
 var metadata = 
-    [
-    "January 26, 2015 10:24 PM<br>30.0 sec at f/8.0 ISO 100",
+    ["January 26, 2015 10:24 PM<br>30.0 sec at f/8.0 ISO 100",
     "January 6, 2015 6:36 PM<br>1/100 sec at f/5.6 ISO 400",
     "April 19, 2015 7:01 AM<br>1/320 sec at f/13 ISO 100",
     "November 6, 2014 9:54 PM<br>1/60 sec at f/13 ISO 100",
@@ -134,7 +133,6 @@ function checkKeycode(event) {
     // window.clearTimeout(mouseTimer);
     window.clearTimeout(mouseTimer);
     if (cursorVisible) {
-        // showElements();
         mouseMoved();
         console.log("was the mouse moved?");
     }
