@@ -1,5 +1,7 @@
-
+// 
 /** This is a website. */
+
+const WAIT_TIME = 3000;
 
 var current = 0, mouseTimer = null, cursorVisible = true;
 
@@ -76,27 +78,21 @@ function update() {
     if (cursorVisible) {
         mouseMoved();
     }
-    document.getElementById("photo").src = "photos/lo-rez/" + photos[current];
-    document.getElementById("photo").src = "photos/hi-rez/" + photos[current];
+    // document.getElementById("photo").src = "photos8/lo-rez/" + photos[current];
     document.getElementById("title").innerHTML = titles[current];
     document.getElementById("metadata").innerHTML = metadata[current];
     document.getElementById("title-box").innerHTML = titles[current];
     document.getElementById("metadata-box").innerHTML = metadata[current];
     document.getElementById("index").innerHTML = (current + 1) + "/" + photos.length;
     // document.getElementById("index-box").innerHTML = (current + 1) + "/" + photos.length;
+    document.getElementById("photo").src = "photos/hi-rez/" + photos[current];
 }
 
 function hideElements() {
     // console.log("hiding elements!");
     mouseTimer = null;
-    document.getElementById("left-arrow").className = "arrows left_arrow hidden";
-    document.getElementById("right-arrow").className = "arrows right_arrow hidden";
-    document.getElementById("title").className = "text-block title hidden";
-    document.getElementById("metadata").className = "outline-text metadata hidden";
-    document.getElementById("title-box").className = "text-box title hidden";
-    document.getElementById("metadata-box").className = "text-box metadata hidden";
-    document.getElementById("index").className = "outline-text index hidden";
-    // document.getElementById("index-box").className = "text-box index hidden";
+    document.getElementById("page").className = "hidden";
+     // document.getElementById("menu").className = "hidden";
     setTimeout(function(){
         document.body.style.cursor = "none";
         cursorVisible = false;
@@ -105,14 +101,8 @@ function hideElements() {
 
 function showElements() {
     // console.log("showing elements!");
-    document.getElementById("left-arrow").className = "arrows left_arrow";
-    document.getElementById("right-arrow").className = "arrows right_arrow";
-    document.getElementById("title").className = "text-block title";
-    document.getElementById("metadata").className = "outline-text metadata";
-    document.getElementById("title-box").className = "text-box title";
-    document.getElementById("metadata-box").className = "text-box metadata";
-    document.getElementById("index").className = "outline-text index";
-    // document.getElementById("index-box").className = "text-box index";
+    document.getElementById("page").className = "";
+    // document.getElementById("menu").className = "";
     document.body.style.cursor = "default";
     cursorVisible = true;
 }
@@ -125,7 +115,7 @@ function mouseMoved(){
     if (!cursorVisible) {
         showElements();
     }
-    mouseTimer = window.setTimeout(hideElements, 3000);
+    mouseTimer = window.setTimeout(hideElements, WAIT_TIME);
 };
 
 // handling Internet Explorer stupidity with window.event
@@ -145,7 +135,7 @@ function checkKeycode(event) {
 }
 
 function previous() {
-    current = current === 0 ? photos.length - 1 : current - 1;
+    current = current == 0 ? photos.length - 1 : current - 1;
     update();      
 }
 
@@ -158,7 +148,7 @@ update();
 
 mouseMoved();
 
-window.setTimeout(hideBanner, 3000);
+window.setTimeout(hideBanner, WAIT_TIME);
 
 function hideBanner() {
     document.getElementById("banner").className = "text-block banner hidden";

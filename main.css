@@ -2,6 +2,20 @@ body, html {
     height: 100%;
     margin: 0;
     cursor: default;
+    /*overflow-y: scroll;*/
+    /*position: absolute;*/
+}
+/*
+l { overflow-y: scroll; }
+body { position: absolute; }
+*/
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333333;
 }
 
 .background {
@@ -12,7 +26,6 @@ body, html {
     left: 0;
     right: 0;
     max-width: 100%;
-    max-height: 100%;
     margin: auto;
     overflow: auto;
     z-index: -2; /* move to back */
@@ -23,24 +36,56 @@ body, html {
     background-size: cover;
 }
 
-.photo {
-    /*background-image: url("photos/IMG_3826-Edit-Edit-2-1.jpg");*/
-    position: fixed;
+.menu {
+    position: absolute;
     left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    max-width: 100%;
-    max-height: 100%;
-    margin: auto;
-    overflow: auto;
-    z-index: -1; /* move to back */
+    top: 2%;
+    transform: translate(-50%, -2%);
+    background-color: rgba(0, 0, 0, 0);
+    /*display: inline-block;*/
+    /*margin: 4px 2px;*/
 }
 
-#grid-view {
-    position: absolute;
-    left: 20%;
-    top: 20%;
-    transform: translate(-20%, -20%);
+li {
+    float: left;
+}
+
+li:hover {
+    color: red;
+    cursor: pointer; 
+}
+
+li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 16px;
+    text-decoration: none;
+}
+
+button {
+    cursor: pointer;
+}
+
+#photo {
+    /*position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);*/
+    height: 100%;
+    background-size: 100%;
+    max-width: 100%;
+    max-height: 100%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin: auto;
+    overflow: auto;
+    margin-top: none;
+    z-index: -1; /* move to back */
+    /*background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;*/
 }
 
 .text-box {
@@ -84,6 +129,26 @@ body, html {
     position: absolute;
 }
 
+.drop-shadow {
+    padding-left: 20px;
+    padding-right: 20px;
+    text-shadow:
+        1px 1px 0 #000;
+    color: white;
+    background: none;
+    border: none;
+    padding: 10px 16px;
+    /*font: 20px helvetica, sans-serif;*/
+    /*font-family: "Raleway"; font-size: 20px;*/
+    font-family: "Rubik"; font-size: 20px;
+    text-align: center;
+    text-decoration: none;
+}
+
+.drop-shadow:hover {
+    opacity: .8;
+}
+
 .title {
 
     /*font-family: 'Open Sans Condensed';*/
@@ -95,28 +160,32 @@ body, html {
     font-weight: normal;
     /*font-weight: lighter; */
     font-style: normal;
-    font-size: 72px;
-    left: 235px;
-    bottom: 140px;
-    text-align: center;
-    /*position: absolute;*/
+    font-size: 60px;
+    /*left: 240px;
+    bottom: 140px;*/
+    left: 18%;
+    bottom: 12%;
+    transform: translate(-18%, -12%);
+    vertical-align: left;
+    display: block;
+    display: inline;
 }
 
 .metadata {
-    font: 25px courier, sans-serif;
-    left: 235px;
-    bottom: 85px;
-    /*left: 18%;
-    bottom: 5%;
-    transform: translate(-18%, -5%);*/
+    display: inline;
+    font: 21px courier, sans-serif;
+    /*left: 240px;
+    bottom: 85px;*/
+    left: 18%;
+    bottom: 8%;
+    transform: translate(-18%, -8%);
 }
 
 .index {
-    font: 25px courier, sans-serif;
-    left: 82%;
+    font: 20px courier, sans-serif;
+    left: 75%;
     bottom: 10%;
-    transform: translate(-82%, -10%);   
-
+    transform: translate(-75%, -10%);   
 }
 
 .hidden {
@@ -133,11 +202,12 @@ body, html {
 }
 
 .arrows {
-    position: fixed;
+    position: absolute;
     border: none;
     outline: none;
+    text-decoration: none;
     color: white;
-    top: 50%;
+    bottom: 50%;
     background-color: rgba(0, 0, 0, 0);
     font: 52px arial, sans-serif;
     cursor: pointer;
@@ -152,7 +222,58 @@ body, html {
     right: 3%;
 }
 
-.arrows:hover {
-    color: red;
+.down_arrow {
+    bottom: 2%;
+    left: 50%;
+    /*transform: translate(-50%, -5%);*/
+    transform: rotate(90deg);
 }
+
+.arrows:hover {
+    opacity: .8;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0 4px;
+}
+
+/* Create four equal columns that sits next to each other */
+.column {
+  flex: 30%;
+  max-width: 33%;
+  padding: 0 4px;
+}
+
+.preview-image {
+    width: 100%;
+    cursor: pointer;
+}
+
+.preview-image:hover {
+    opacity: .8;
+}
+
+.column img {
+  margin-top: 8px;
+  vertical-align: middle;
+}
+
+/* Responsive layout - makes a two column-layout instead of four columns */
+@media screen and (max-width: 800px) {
+  .column {
+    flex: 50%;
+    max-width: 50%;
+  }
+}
+
+/* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+  .column {
+    flex: 100%;
+    max-width: 100%;
+  }
+}
+
 

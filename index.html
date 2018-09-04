@@ -1,56 +1,96 @@
+<!DOCTYPE html>
 <html>
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-
-<title>lars.photos</title>
-
-<link rel="stylesheet" type="text/css" href="main.css">
-
-<link href='https://fonts.googleapis.com/css?family=Open Sans Condensed:300' rel='stylesheet'>
-
-<link rel="stylesheet" media="screen" href="https://fontlibrary.org/face/bebas" type="text/css"/>
-
-<link rel="shortcut icon" href="photos/favicon.ico">
-
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>lars.photos</title>
+    <link rel="stylesheet" type="text/css" href="main.css">
+    <link href='https://fonts.googleapis.com/css?family=Open Sans Condensed:300' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Rubik' rel='stylesheet'>
+    <link rel="stylesheet" media="screen" href="https://fontlibrary.org/face/bebas" type="text/css"/>
+    <link rel="shortcut icon" href="photos/favicon.ico">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 
 <body>
 
 <div class="background"></div>
 
-<img id="photo" class="photo">
+<img id="photo"> 
 
-<div id="banner" class="text-block banner">
-    <p>
-        <h1>
-            lars.photos
-        </h1>
-    </p>
+<!-- <div>
+    <img id="photo">
+</div> -->
+<!-- <img id="photo" class="photo" src="photos/hi-rez/IMG_3826-Edit-Edit-2.jpg"> -->
+
+<div id="page"> 
+
+    <ul class="menu"> 
+        <li>
+            <a href="oregon.html" class="drop-shadow" style="opacity:.8">oregon</a>
+        </li>
+
+        <li>
+            <a href="california.html" class="drop-shadow">california</a>
+        </li>
+
+<!--         <li>
+            <a href="bio.html" class="drop-shadow">bio</a>
+        </li>
+ -->
+        <li>
+            <a id="500px" class="drop-shadow" href="https://500px.com/larsmayrand" target="_blank">500px</a>
+        </li>
+
+        <li>
+            <a id="github" class="drop-shadow" href="https://github.com/larsPhotos/larsPhotos.github.io" target="_blank">github</a>
+        </li>
+    </ul>
+
+    <div> 
+        <button class="arrows left_arrow" onclick="previous()">&#8249;</button>
+
+        <button class="arrows right_arrow" onclick="next()">&#8250;</button>
+
+        <a href="#grid-view" class="arrows down_arrow">&#8250;</a>
+    </div>
+
+    <div id="banner" class="text-block banner">
+        <p>
+            <h1>
+                lars.photos
+            </h1>
+        </p>
+    </div>
+
+    <div id="title-box" class="text-box title"></div>
+    <div id="title" class="text-block title"></div>    
+    <div id="metadata-box" class="text-box metadata"></div>
+    <div id="metadata" class="outline-text metadata"></div>
+    <div id="index" class="outline-text index"></div>
+
+</div> 
+
+<div id="grid-view" class="row">
+    <div class="column">
+        <img src="photos/hi-rez/slender.jpg" class="preview-image"> 
+        <img src="photos/hi-rez/portlandia.jpg" class="preview-image"> 
+        <img src="photos/hi-rez/IMG_2726-1.jpg" class="preview-image" onclick=""> 
+        
+    </div>
+    <div class="column">
+        <img src="photos/hi-rez/unedited.jpg" class="preview-image"> 
+        <img src="photos/hi-rez/portlandia_II.jpg" class="preview-image"> 
+        <img src="photos/hi-rez/IMG_0905-1.jpg" class="preview-image">         
+    </div>
+    <div class="column">
+        <img src="photos/hi-rez/edited.jpg" class="preview-image">         
+        <img src="photos/hi-rez/portlandia_III.jpg" class="preview-image"> 
+        <img src="photos/hi-rez/corbett_house.jpg" class="preview-image"> 
+    </div>
 </div>
 
-<div id="title-box" class="text-box title"></div>
 
-<div id="title" class="text-block title"></div>    
-
-<div id="metadata-box" class="text-box metadata"></div>
-
-<div id="metadata" class="outline-text metadata"></div>
-
-<!-- <div id="index-box" class="text-box index"></div> -->
-
-<div id="index" class="outline-text index"></div>
-
-<!-- <button id="grid-view">
-    <img src="photos/grid_view_best.png" width="20px">
-</button>
- -->
-<button id="left-arrow" class="hidden" onclick="previous()">&#8249;</button>
-
-<button id="right-arrow" class="hidden" onclick="next()">&#8250;</button>
-
-<script src="main.js"></script>
+<script src="oregon.js"></script>
 
 </body>
 </html>
