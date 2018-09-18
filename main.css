@@ -10,14 +10,6 @@ l { overflow-y: scroll; }
 body { position: absolute; }
 */
 
-ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    background-color: #333333;
-}
-
 .background {
     background-color: black;
     position: fixed;
@@ -36,31 +28,66 @@ ul {
     background-size: cover;
 }
 
-.menu {
+
+footer {
+    margin: 0;
+    padding: 0;
+}
+
+.site-banner {
+    background-image: linear-gradient(to bottom, rgba(0,0,0,1), rgba(0,0,0,0)); 
+    width: 100%;
+    height: 10%;
     position: absolute;
     left: 50%;
-    top: 2%;
-    transform: translate(-50%, -2%);
-    background-color: rgba(0, 0, 0, 0);
-    /*display: inline-block;*/
-    /*margin: 4px 2px;*/
+    top: 0%;
+    transform: translate(-50%, -0%);
+    color: white;
+    font: 14px arial, sans-serif;
+    text-align: center;
+    padding-top: 20px;
+}
+
+.title-position {
+    position: absolute;
+    left: 20%;
+    top: 99%;
+    transform: translate(-20%, -99%);
+    text-align: center;
+    /*cant move down?????*/
+}
+
+#info {
+    background-color: #333333;
+    height: 100%;
+}
+
+ul {
+    list-style-type: none;
+    text-align: center;
+    /*margin: 0;
+    padding: 0;*/
+    overflow: hidden;
+    background-color: #333333;
+        /*margin: auto;*/
+    /*width: 60%;*/
 }
 
 li {
-    float: left;
+    display: inline;
 }
 
-li:hover {
+/*li:hover {
     color: red;
     cursor: pointer; 
-}
+}*/
 
 li a {
-    display: block;
+    display: inline-block;
     color: white;
     text-align: center;
-    padding: 16px;
-    text-decoration: none;
+    /*padding: 16px;
+    text-decoration: bold;*/  
 }
 
 button {
@@ -89,18 +116,19 @@ button {
 }
 
 .text-box {
-    position: absolute;
+    /*position: absolute;*/
     background-color: black;
     color: black;
-    padding-left: 20px;
-    padding-right: 20px;
-    text-align: center;
+    padding-left: 10px;
+    padding-right: 10px;    
+    height: 50px;
+    /*text-align: center;*/
     opacity: .5;
-    text-align: center;
+    /*text-align: center;*/
 }
 
 .text-block {
-    position: absolute;
+    /*position: absolute;*/ 
     background-color: black;
     color: white;
     padding-left: 20px;
@@ -126,23 +154,72 @@ button {
         -1px 1px 0 #000,
         1px 1px 0 #000;
     color: white;
-    position: absolute;
+    position: relative;
+    bottom: 50px;
+    /*position: absolute;*/
 }
 
-.drop-shadow {
+#about {
+    color: white;
     padding-left: 20px;
     padding-right: 20px;
-    text-shadow:
-        1px 1px 0 #000;
+    background: none;
+    border: none;
+    padding: 10px 16px;
+    /*font: 20px helvetica, sans-serif;*/
+    font-family: "Raleway"; font-size: 50px;
+    /*font-family: "Rubik"; font-size: 20px;*/
+    /*text-align: center;*/
+    text-decoration: none;
+}
+
+.text {
     color: white;
+    padding-left: 20px;
+    padding-right: 20px;
     background: none;
     border: none;
     padding: 10px 16px;
     /*font: 20px helvetica, sans-serif;*/
     /*font-family: "Raleway"; font-size: 20px;*/
     font-family: "Rubik"; font-size: 20px;
+    /*text-align: center;*/
+    text-decoration: none;
+}
+
+.drop-shadow {
+    color: white;
+    padding-left: 20px;
+    padding-right: 20px;
+    text-shadow:
+        1px 1px 0 #000; /
+    
+    background: none;
+    border: none;
+    padding: 10px 16px;
+    /*font: 20px helvetica, sans-serif;*/
+    /*font-family: "Raleway"; font-size: 20px;*/
+    font-family: "Rubik"; font-size: 20px;
+    /*text-align: center;*/
+    text-decoration: none;
+}
+
+h5 {
+    color: white;
+    padding-left: 20px;
+    padding-right: 20px;
+    text-shadow:
+        1px 1px 0 #000; /
+    
+    background: none;
+    border: none;
+    padding: 10px 16px;
+    /*font: 20px helvetica, sans-serif;*/
+    /*font-family: "Raleway"; font-size: 20px;*/
+    font-family: "Rubik"; font-size: 40px;
     text-align: center;
     text-decoration: none;
+
 }
 
 .drop-shadow:hover {
@@ -163,22 +240,21 @@ button {
     font-size: 60px;
     /*left: 240px;
     bottom: 140px;*/
-    left: 18%;
-    bottom: 12%;
-    transform: translate(-18%, -12%);
-    vertical-align: left;
-    display: block;
-    display: inline;
+    /*width: */
+    /*vertical-align: left;*/
+    /*display: block;
+    display: inline;*/
 }
 
 .metadata {
-    display: inline;
+    /*float: none;*/
+    /*display: inline;*/
     font: 21px courier, sans-serif;
     /*left: 240px;
     bottom: 85px;*/
-    left: 18%;
+    /*left: 18%;
     bottom: 8%;
-    transform: translate(-18%, -8%);
+    transform: translate(-18%, -8%);*/
 }
 
 .index {
@@ -234,34 +310,36 @@ button {
 }
 
 .row {
+  margin: 0;
+  padding: none;
+  padding: 0;
   display: flex;
   flex-wrap: wrap;
-  padding: 0 4px;
+  /*padding: 0 4px;*/
 }
 
 /* Create four equal columns that sits next to each other */
 .column {
   flex: 30%;
-  max-width: 33%;
-  padding: 0 4px;
+  max-width: 33.3%;
 }
 
 .preview-image {
+    padding: none;
     width: 100%;
-    cursor: pointer;
 }
 
 .preview-image:hover {
     opacity: .8;
+    cursor: pointer;
 }
 
 .column img {
-  margin-top: 8px;
   vertical-align: middle;
 }
 
 /* Responsive layout - makes a two column-layout instead of four columns */
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 500px) {
   .column {
     flex: 50%;
     max-width: 50%;
@@ -269,11 +347,16 @@ button {
 }
 
 /* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 300px) {
   .column {
     flex: 100%;
     max-width: 100%;
   }
 }
 
+#bio-pic {
+    position: relative;
+    
+    /*left: 50px;*/
+}
 

@@ -1,7 +1,7 @@
 
 /** Logic for california page. */
 
-const WAIT_TIME = 4000;
+const WAIT_TIME = 3000;
 
 var current = 0, mouseTimer = null, cursorVisible = true;
 

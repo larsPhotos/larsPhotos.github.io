@@ -9,6 +9,7 @@
     <link rel="stylesheet" media="screen" href="https://fontlibrary.org/face/bebas" type="text/css"/>
     <link rel="shortcut icon" href="photos/favicon.ico">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
 <body>
@@ -17,44 +18,13 @@
 
 <img id="photo"> 
 
-<!-- <div>
-    <img id="photo">
+<!-- <div id="site-banner" class="site-banner">
+    <h1>
+        photography by lars mayrand
+    </h1>
 </div> -->
-<!-- <img id="photo" class="photo" src="photos/hi-rez/IMG_3826-Edit-Edit-2.jpg"> -->
 
-<div id="page"> 
-
-    <ul class="menu"> 
-        <li>
-            <a href="oregon.html" class="drop-shadow" style="opacity:.8">oregon</a>
-        </li>
-
-        <li>
-            <a href="california.html" class="drop-shadow">california</a>
-        </li>
-
-<!--         <li>
-            <a href="bio.html" class="drop-shadow">bio</a>
-        </li>
- -->
-        <li>
-            <a id="500px" class="drop-shadow" href="https://500px.com/larsmayrand" target="_blank">500px</a>
-        </li>
-
-        <li>
-            <a id="github" class="drop-shadow" href="https://github.com/larsPhotos/larsPhotos.github.io" target="_blank">github</a>
-        </li>
-    </ul>
-
-    <div> 
-        <button class="arrows left_arrow" onclick="previous()">&#8249;</button>
-
-        <button class="arrows right_arrow" onclick="next()">&#8250;</button>
-
-        <a href="#grid-view" class="arrows down_arrow">&#8250;</a>
-    </div>
-
-    <div id="banner" class="text-block banner">
+<div id="banner" class="text-block banner">
         <p>
             <h1>
                 lars.photos
@@ -62,42 +32,72 @@
         </p>
     </div>
 
-    <div id="title-box" class="text-box title"></div>
-    <div id="title" class="text-block title"></div>    
-    <div id="metadata-box" class="text-box metadata"></div>
-    <div id="metadata" class="outline-text metadata"></div>
-    <div id="index" class="outline-text index"></div>
-
+<div id="page"> 
+    <div class="title-position">
+        <div id="title" class="text-block title"></div>    
+        <div id="metadata-box" class="text-box metadata"></div>
+        <div id="metadata" class="outline-text metadata"></div>
+    </div>
+    <div> 
+        <button class="arrows left_arrow" onclick="previous()">&#8249;</button>
+        <button class="arrows right_arrow" onclick="next()">&#8250;</button>
+        <a href="#grid-view" class="arrows down_arrow">&#8250;</a>
+    </div>
 </div> 
 
+    
 <div id="grid-view" class="row">
-    <div class="column">
-        <img src="photos/hi-rez/slender.jpg" class="preview-image" onclick="photo(0)"> 
-        <img src="photos/hi-rez/edited.jpg" class="preview-image" onclick="photo(3)">
-        <img src="photos/hi-rez/portlandia_IV.jpg" class="preview-image" onclick="photo(8)">
-
-        <img src="photos/hi-rez/that_tree.jpg" class="preview-image" onclick="photo(11)">
-        <img src="photos/hi-rez/anyone_worldwide.jpg" class="preview-image" onclick="photo(13)"> 
-    </div>
-    <div class="column">
-        <img src="photos/hi-rez/always_fly_with_a_camera.jpg" class="preview-image" onclick="photo(1)">
-        <img src="photos/hi-rez/enchanted.jpg" class="preview-image" onclick="photo(4)">
-        <img src="photos/hi-rez/portlandia_II.jpg" class="preview-image" onclick="photo(6)"> 
-        <img src="photos/hi-rez/IMG_2726.jpg" class="preview-image" onclick="photo(9)"> 
-        <img src="photos/hi-rez/IMG_0905.jpg" class="preview-image" onclick="photo(12)">
-        <img src="photos/hi-rez/swirl.jpg" class="preview-image" onclick="photo(14)"> 
-    </div>
-    <div class="column">
-        <img src="photos/hi-rez/unedited.jpg" class="preview-image" onclick="photo(2)"> 
-        <img src="photos/hi-rez/portlandia.jpg" class="preview-image" onclick="photo(5)">
-        <img src="photos/hi-rez/portlandia_III.jpg" class="preview-image" onclick="photo(7)">
-        <img src="photos/hi-rez/corbett_house.jpg" class="preview-image" onclick="photo(10)"> 
-        <img src="photos/hi-rez/yellow.jpg" class="preview-image" onclick="photo(15)"> 
-    </div>
+    <div id="column_0" class="column"></div>
+    <div id="column_1" class="column"></div>
+    <div id="column_2" class="column"></div>
 </div>
 
+<footer>
+    <ul> 
+        <li>
+            <a class="drop-shadow" href="mailto:mayrand.lars@Gmail.com">
+                <i class="fa fa-envelope fa-2x"></i>
+            </a>
+        <li>
+            <a id="500px" class="drop-shadow" href="https://500px.com/larsmayrand" target="_blank">
+                <i class="fa fa-500px fa-2x"></i>
+            </a>
+        </li>
+        <li>
+            <a id="github" class="drop-shadow" href="https://github.com/larsPhotos/larsPhotos.github.io" target="_blank">
+                <i class="fa fa-github fa-2x"></i>
+            </a>
+        </li>
+        <li>
+            <a class="drop-shadow" href="https://instagram.com/larsmayrand" target="_blank">
+                <i class="fa fa-instagram fa-2x"></i>
+            </a>
+        </li>
+        <li class="text">© Lars Mayrand 2018</li>
+    </ul>
+</footer>
 
-<script src="oregon.js"></script>
+<!-- <div id="info"> 
+
+    
+ -->
+     <!-- <h5 id="about">About</h5>
+
+     <img id="bio-pic" src="photos/hi-rez/selfie.jpg">
+
+    <div class="text" style="float:right; width:60%;">
+        <p>
+            I am a casual photographer from Pacifica California.
+        </p>
+        <p>
+            I designed this site for maximum content immersion. The swipe and scroll navigation prioritizes full screen navigation. 
+        </p>
+    </div> -->
+
+    
+
+
+<script src="main.js"></script>
 
 </body>
 </html>
