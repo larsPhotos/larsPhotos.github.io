@@ -28,7 +28,6 @@ body { position: absolute; }
     background-size: cover;
 }
 
-
 footer {
     margin: 0;
     padding: 0;
@@ -46,15 +45,6 @@ footer {
     font: 14px arial, sans-serif;
     text-align: center;
     padding-top: 20px;
-}
-
-.title-position {
-    position: absolute;
-    left: 20%;
-    top: 99%;
-    transform: translate(-20%, -99%);
-    text-align: center;
-    /*cant move down?????*/
 }
 
 #info {
@@ -115,26 +105,26 @@ button {
     background-size: cover;*/
 }
 
+.title-position {
+    position: absolute;
+    left: 20%;
+    top: 99%;
+    transform: translate(-20%, -99%);
+    text-align: center;
+}
+
 .text-box {
-    /*position: absolute;*/
     background-color: black;
     color: black;
-    padding-left: 10px;
-    padding-right: 10px;    
+    padding: 5px;
     height: 50px;
-    /*text-align: center;*/
-    opacity: .5;
-    /*text-align: center;*/
+    opacity: .35;
 }
 
 .text-block {
-    /*position: absolute;*/ 
     background-color: black;
     color: white;
-    padding-left: 20px;
-    padding-right: 20px;
-    /*text-align: right;*/
-    /*opacity: 1;*/
+    padding: 5px 15px;
 }
 
 .banner {
@@ -227,34 +217,14 @@ h5 {
 }
 
 .title {
-
-    /*font-family: 'Open Sans Condensed';*/
-    /*bebas*/
-    /*font-family: times;*/
     font-family: 'BebasNeueRegular';
-    /*fon*/
-    /*font-family: 'BebasNeueLight'; */
     font-weight: normal;
-    /*font-weight: lighter; */
     font-style: normal;
-    font-size: 60px;
-    /*left: 240px;
-    bottom: 140px;*/
-    /*width: */
-    /*vertical-align: left;*/
-    /*display: block;
-    display: inline;*/
+    font-size: 50px;
 }
 
 .metadata {
-    /*float: none;*/
-    /*display: inline;*/
-    font: 21px courier, sans-serif;
-    /*left: 240px;
-    bottom: 85px;*/
-    /*left: 18%;
-    bottom: 8%;
-    transform: translate(-18%, -8%);*/
+    font: 18px courier, sans-serif;
 }
 
 .index {
@@ -339,12 +309,12 @@ h5 {
 }
 
 /* Responsive layout - makes a two column-layout instead of four columns */
-@media screen and (max-width: 500px) {
+/*@media screen and (max-width: 500px) {
   .column {
     flex: 50%;
     max-width: 50%;
   }
-}
+}*/
 
 /* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
 @media screen and (max-width: 300px) {
@@ -353,10 +323,3 @@ h5 {
     max-width: 100%;
   }
 }
-
-#bio-pic {
-    position: relative;
-    
-    /*left: 50px;*/
-}
-
