@@ -2,7 +2,7 @@
 /** This is a website. */
 
 // wait for something to go away
-const WAIT_TIME = 3000;
+const WAIT_TIME = 2000;
 
 const MONTHS = ["January", "February", "March", "April", "May", "June",
   "July", "August", "September", "October", "November", "December"
@@ -26,8 +26,10 @@ function loadData() {
 }
     
 function loadPhotos() {
-    for (var i = 0; i < 3; i++) {
-       for (var j = i; j < photos.length - 1; j += 3) {
+    var viewportWidth = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
+    var columns = viewportWidth < 480 ? 2 : 3; 
+    for (var i = 0; i < columns; i++) {
+       for (var j = i; j < photos.length - 1; j += columns) {
             document.getElementById("column_" + i).innerHTML += "<img src=photos/small/" + photos[j].file + " class='preview-image' onclick='photo(" + j + ")'>";
         }    
     }    

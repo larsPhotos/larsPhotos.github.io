@@ -92,7 +92,7 @@ button {
     height: 100%;
     background-size: 100%;
     max-width: 100%;
-    max-height: 100%;
+    /*max-height: 100%;*/
     display: block;
     margin-left: auto;
     margin-right: auto;
@@ -107,18 +107,18 @@ button {
 
 .title-position {
     position: absolute;
-    left: 20%;
-    top: 99%;
-    transform: translate(-20%, -99%);
+    right: 50%;
+    top: 95%;
+    transform: translate(50%, -95%);
     text-align: center;
 }
 
 .text-box {
     background-color: black;
     color: black;
-    padding: 5px;
-    height: 50px;
-    opacity: .35;
+    padding: .5vmin;
+    height: 5vmin;
+    opacity: .4;
 }
 
 .text-block {
@@ -139,13 +139,13 @@ button {
     padding-left: 20px;
     padding-right: 20px;
     text-shadow:
-        -1px -1px 0 #000,
-        1px -1px 0 #000,
-        -1px 1px 0 #000,
-        1px 1px 0 #000;
+        -.5px -.5px 1px #000,
+        .5px -.5px 1px #000,
+        -.5px .5px 1px #000,
+        .5px .5px 1px #000;
     color: white;
-    position: relative;
-    bottom: 50px;
+    /*position: relative;*/
+    /*bottom: 50px;*/
     /*position: absolute;*/
 }
 
@@ -165,31 +165,32 @@ button {
 
 .text {
     color: white;
-    padding-left: 20px;
-    padding-right: 20px;
+    /*padding-left: 1vmin;
+    padding-right: 1vmin;*/
+    padding: .9em .9em;
     background: none;
     border: none;
-    padding: 10px 16px;
+    /*padding: 10px 16px;*/
     /*font: 20px helvetica, sans-serif;*/
     /*font-family: "Raleway"; font-size: 20px;*/
-    font-family: "Rubik"; font-size: 20px;
+    font-family: "Rubik"; font-size: .9em;
     /*text-align: center;*/
     text-decoration: none;
 }
 
 .drop-shadow {
     color: white;
-    padding-left: 20px;
-    padding-right: 20px;
+    padding: .9em .9em;
+    /*padding-left: 20px;
+    padding-right: 20px;*/
     text-shadow:
         1px 1px 0 #000; /
-    
     background: none;
     border: none;
-    padding: 10px 16px;
+    /*padding: 10px 16px;*/
     /*font: 20px helvetica, sans-serif;*/
     /*font-family: "Raleway"; font-size: 20px;*/
-    font-family: "Rubik"; font-size: 20px;
+    font-family: "Rubik"; font-size: 10px;
     /*text-align: center;*/
     text-decoration: none;
 }
@@ -206,7 +207,7 @@ h5 {
     padding: 10px 16px;
     /*font: 20px helvetica, sans-serif;*/
     /*font-family: "Raleway"; font-size: 20px;*/
-    font-family: "Rubik"; font-size: 40px;
+    font-family: "Rubik"; font-size: 20px;
     text-align: center;
     text-decoration: none;
 
@@ -220,11 +221,15 @@ h5 {
     font-family: 'BebasNeueRegular';
     font-weight: normal;
     font-style: normal;
-    font-size: 50px;
+    /*font-size: 50px;*/
+    /*font-size: 2em;*/
+    font-size: 5vmin;
 }
 
 .metadata {
-    font: 18px courier, sans-serif;
+    /*font: 1em courier, sans-serif;*/
+    font: 2vmin courier, sans-serif;
+    transform: translate(0%, -5vmin);
 }
 
 .index {
@@ -255,9 +260,34 @@ h5 {
     color: white;
     bottom: 50%;
     background-color: rgba(0, 0, 0, 0);
-    font: 52px arial, sans-serif;
+    font: 5vmin arial, sans-serif;
     cursor: pointer;
-    text-shadow: 1px 1px red;
+    /*text-shadow: 1px 1px red;*/
+    text-shadow:
+        -.5px -.5px .5px #000,
+        .5px -.5px .5px #000,
+        -.5px .5px .5px #000,
+        .5px .5px .5px #000;
+}
+
+.text_2 {
+    position: absolute;
+    border: none;
+    outline: none;
+    text-decoration: none;
+    color: white;
+    text-shadow:
+        -.5px -.5px .5px #000,
+        .5px -.5px .5px #000,
+        -.5px .5px .5px #000,
+        .5px .5px .5px #000;
+    background-color: rgba(0, 0, 0, 0);
+    bottom: 4%;
+    right: 50%;
+    transform: translate(50%, 4%);
+    font: 2vmin arial, sans-serif;
+    /*cursor: pointer;*/
+    
 }
 
 .left_arrow {
@@ -269,9 +299,9 @@ h5 {
 }
 
 .down_arrow {
-    bottom: 2%;
+    bottom: 0%;
     left: 50%;
-    /*transform: translate(-50%, -5%);*/
+    transform: translate(50%, 0%);
     transform: rotate(90deg);
 }
 
@@ -288,7 +318,7 @@ h5 {
   /*padding: 0 4px;*/
 }
 
-/* Create four equal columns that sits next to each other */
+/* Create 3 equal columns that sits next to each other */
 .column {
   flex: 30%;
   max-width: 33.3%;
@@ -310,16 +340,39 @@ h5 {
 
 /* Responsive layout - makes a two column-layout instead of four columns */
 /*@media screen and (max-width: 500px) {
-  .column {
-    flex: 50%;
-    max-width: 50%;
-  }
+  
 }*/
 
 /* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
-@media screen and (max-width: 300px) {
+/*@media screen and (max-width: 300px) {
   .column {
     flex: 100%;
     max-width: 100%;
   }
+}*/
+@media screen and (max-width: 480px) {
+/*  html {
+    font-size: xx-small;
+    
+    line-height: 120%;
+  }*/
+
+  
+
+/*.title {
+    font-family: 'BebasNeueRegular';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 20px;
+}
+
+.metadata {
+    font-size: 5px;
+}*/
+
+.column {
+    flex: 50%;
+    max-width: 50%;
+  }
+
 }
