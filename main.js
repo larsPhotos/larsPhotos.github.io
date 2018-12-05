@@ -233,6 +233,8 @@ function move(e) {
         // y0 = null;
     } else if (scrolling) {
         scrolling = false;
+        container.addEventListener("mousemove", mouseMoved, false);
+        container.addEventListener("touchmove", mouseMoved, false);
     }
 }
 
@@ -255,11 +257,15 @@ function mouseMoved(e){
     } else {
         let dx = Math.abs(unify(e).clientX - x0),
             dy = Math.abs(unify(e).clientY - y0);
-        if (dx > dy) {
-            // container.classList.toggle("smooth"); 
-            swiping = true;    
+        if (dx == dy && dx == 0) {
+            showText();    
+        } else if (dx > dy) {
+            swiping = true;
+            
         } else {
             scrolling = true;
+            container.removeEventListener("mousemove", mouseMoved, false);
+            container.removeEventListener("touchmove", mouseMoved, false);
         }
     } 
 }
