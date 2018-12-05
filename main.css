@@ -1,14 +1,13 @@
+/*
+All CSS should be "-" formatted
+*/
 body, html {
     height: 100%;
     margin: 0;
-    cursor: default;
-    /*overflow-y: scroll;*/
-    /*position: absolute;*/
+    padding: 0;
+    overflow-x: hidden;
+    position: relative;
 }
-/*
-l { overflow-y: scroll; }
-body { position: absolute; }
-*/
 
 .background {
     background-color: black;
@@ -20,7 +19,7 @@ body { position: absolute; }
     max-width: 100%;
     margin: auto;
     overflow: auto;
-    z-index: -2; /* move to back */
+    z-index: -1; /* move to back */
 
     /* Center and scale the image nicely */
     background-position: center;
@@ -28,23 +27,18 @@ body { position: absolute; }
     background-size: cover;
 }
 
-footer {
-    margin: 0;
-    padding: 0;
-}
-
 .site-banner {
     background-image: linear-gradient(to bottom, rgba(0,0,0,1), rgba(0,0,0,0)); 
     width: 100%;
-    height: 10%;
+    height: 20%;
     position: absolute;
     left: 50%;
     top: 0%;
     transform: translate(-50%, -0%);
     color: white;
-    font: 14px arial, sans-serif;
+    font: 3vmin arial, sans-serif;
     text-align: center;
-    padding-top: 20px;
+    padding-top: 1vmin;
 }
 
 #info {
@@ -52,92 +46,82 @@ footer {
     height: 100%;
 }
 
-ul {
-    list-style-type: none;
-    text-align: center;
-    /*margin: 0;
-    padding: 0;*/
-    overflow: hidden;
-    background-color: #333333;
-        /*margin: auto;*/
-    /*width: 60%;*/
-}
-
-li {
-    display: inline;
-}
-
-/*li:hover {
-    color: red;
-    cursor: pointer; 
-}*/
-
-li a {
-    display: inline-block;
-    color: white;
-    text-align: center;
-    /*padding: 16px;
-    text-decoration: bold;*/  
-}
-
-button {
-    cursor: pointer;
-}
-
-#photo {
-    /*position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);*/
+.container {
     height: 100%;
     background-size: 100%;
-    max-width: 100%;
-    /*max-height: 100%;*/
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    margin: auto;
-    overflow: auto;
-    margin-top: none;
-    z-index: -1; /* move to back */
-    /*background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;*/
+    
+
+    --n: 1;
+    display: flex;
+    align-items: center;
+
+    width: 100%; 
+    width: calc(var(--n)*100%);
+    /*height: 50vw; max-height: 100vh;*/
+    transform: translate(calc(var(--tx, 0px) + var(--i, 0)/var(--n)*-100%)); 
 }
+
+.stupid-container {
+    width: calc(100%/var(--n));
+    height: 100%;
+}
+
+.image {
+    display: block;
+    margin: auto;
+    /*width: 50%; */
+
+    /*align-items: center;*/
+    max-height: 100%;
+    max-width: calc(100%/var(--n));
+    max-width: 100vw;
+    user-select: none;
+    pointer-events: none;
+    -khtml-user-select: none;
+    -o-user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+}
+
+.smooth { transition: transform  calc(var(--f, 1)*.5s) ease-out }
 
 .title-position {
     position: absolute;
     right: 50%;
-    top: 95%;
-    transform: translate(50%, -95%);
+    top: 93%;
+    transform: translate(50%, -93%);
     text-align: center;
+    white-space: nowrap;
 }
 
 .text-box {
     background-color: black;
     color: black;
-    padding: .5vmin;
-    height: 5vmin;
+    height: 6vmin;
+    padding: 1vmin;
     opacity: .4;
 }
+
 
 .text-block {
     background-color: black;
     color: white;
-    padding: 5px 15px;
+    padding: 1vmin 2vmin;
 }
 
 .banner {
-    font: 14px arial, sans-serif;
     position: absolute;
+    z-index: 1;
+    font: .6em arial, sans-serif;
+    /*font: .6em arial, sans-serif;*/
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
 }
 
 .outline-text {
-    padding-left: 20px;
-    padding-right: 20px;
+    padding-left: 2vmin;
+    padding-right: 2vmin;
     text-shadow:
         -.5px -.5px 1px #000,
         .5px -.5px 1px #000,
@@ -173,7 +157,7 @@ button {
     /*padding: 10px 16px;*/
     /*font: 20px helvetica, sans-serif;*/
     /*font-family: "Raleway"; font-size: 20px;*/
-    font-family: "Rubik"; font-size: .9em;
+    font-family: "Rubik"; font-size: 1.2em;
     /*text-align: center;*/
     text-decoration: none;
 }
@@ -223,13 +207,27 @@ h5 {
     font-style: normal;
     /*font-size: 50px;*/
     /*font-size: 2em;*/
-    font-size: 5vmin;
+    font-size: 7vmin;
 }
 
 .metadata {
     /*font: 1em courier, sans-serif;*/
-    font: 2vmin courier, sans-serif;
-    transform: translate(0%, -5vmin);
+    /*font: 3vmin courier, sans-serif;*/
+    font-family: 'courier';
+    font-size: 3vmin;
+    /*transform: translate(0%, -6vmin);*/
+    position: relative;
+    bottom: 2.4em;
+}
+
+.raised {
+    position: relative;
+    bottom: .5em;
+}
+
+.relative {
+    position: relative;
+    bottom: -.8em;
 }
 
 .index {
@@ -258,9 +256,9 @@ h5 {
     outline: none;
     text-decoration: none;
     color: white;
-    bottom: 50%;
+    
     background-color: rgba(0, 0, 0, 0);
-    font: 5vmin arial, sans-serif;
+    font: 10vmin arial, sans-serif;
     cursor: pointer;
     /*text-shadow: 1px 1px red;*/
     text-shadow:
@@ -271,7 +269,7 @@ h5 {
 }
 
 .text_2 {
-    position: absolute;
+    position: relative;
     border: none;
     outline: none;
     text-decoration: none;
@@ -282,26 +280,73 @@ h5 {
         -.5px .5px .5px #000,
         .5px .5px .5px #000;
     background-color: rgba(0, 0, 0, 0);
-    bottom: 4%;
-    right: 50%;
-    transform: translate(50%, 4%);
-    font: 2vmin arial, sans-serif;
+    /*bottom: 6%;
+    right: 50%;*/
+    /*transform: translate(50%, 6%);*/
+    font: 3vmin arial, sans-serif;
     /*cursor: pointer;*/
+    top: 3em;
     
 }
 
+.medium_text {
+    margin: 0px;
+    border: none;
+    outline: none;
+    text-decoration: none;
+    color: white;
+    text-shadow:
+        -.5px -.5px .5px #000,
+        .5px -.5px .5px #000,
+        -.5px .5px .5px #000,
+        .5px .5px .5px #000;
+    background-color: rgba(0, 0, 0, 0);
+    padding: none;
+    font: 9vmin arial, sans-serif;
+}
+
+.medium_text:hover {
+    opacity: .5;
+}
+
+.small_text {
+    font: 4vmin arial, sans-serif;
+    overflow: hidden;
+    margin:0px;
+
+    border: none;
+    outline: none;
+    text-decoration: none;
+    color: white;
+    text-shadow:
+        -.5px -.5px .5px #000,
+        .5px -.5px .5px #000,
+        -.5px .5px .5px #000,
+        .5px .5px .5px #000;
+    background-color: rgba(0, 0, 0, 0);
+}
+
 .left_arrow {
+    position: absolute;
+    bottom: 50%;
     left: 3%;
 }
 
 .right_arrow {
+    position: absolute;
+    bottom: 50%;
     right: 3%;
 }
 
 .down_arrow {
-    bottom: 0%;
+    position: absolute;
+    bottom: 2%;
     left: 50%;
-    transform: translate(50%, 0%);
+    transform: translate(50%, 2%);
+}
+
+.rotate {
+    position: absolute;
     transform: rotate(90deg);
 }
 
@@ -344,35 +389,58 @@ h5 {
 }*/
 
 /* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
-/*@media screen and (max-width: 300px) {
-  .column {
-    flex: 100%;
-    max-width: 100%;
-  }
-}*/
-@media screen and (max-width: 480px) {
-/*  html {
-    font-size: xx-small;
-    
-    line-height: 120%;
-  }*/
+@media screen and (min-width: 500px) {
+    .title {
+        font-size: 35px;
+    }
+    .metadata {
+        font-size: 15px;   
+    }
+    .text-box {
+        height: 20px;
+        padding: 10px;
+    }
+    .arrows {
+        font-size: 50px;
+    }
 
-  
+    .small_text {
+        font-size: 20px;
+    }
 
-/*.title {
-    font-family: 'BebasNeueRegular';
-    font-weight: normal;
-    font-style: normal;
-    font-size: 20px;
+    .medium_text {
+        font-size: 40px;
+    }
 }
 
-.metadata {
-    font-size: 5px;
-}*/
+@media screen and (max-width: 480px) {
+    .column {
+        flex: 50%;
+        max-width: 50%;
+    }
+}
 
-.column {
-    flex: 50%;
-    max-width: 50%;
-  }
+footer {
+    white-space: nowrap;
+}
 
+ul {
+    list-style-type: none;
+    text-align: center;
+    overflow: hidden;
+    background-color: #333333;
+}
+
+li {
+    display: inline;
+}
+
+li a {
+    display: inline-block;
+    color: white;
+    text-align: center;
+}
+
+button {
+    cursor: pointer;
 }
