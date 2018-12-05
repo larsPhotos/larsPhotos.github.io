@@ -81,7 +81,7 @@ body, html {
     -webkit-user-select: none;
 }
 
-.smooth { transition: transform  calc(var(--f, 1)*.3s) ease-out }
+.smooth { transition: transform  calc(var(--f, 1)*.5s) ease-out }
 
 .title-position {
     position: absolute;

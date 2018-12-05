@@ -45,7 +45,7 @@ var mouseTimer = null, cursorVisible = true;
 
 var photos;
 
-let i = 0, x0 = null, y0 = null, mousedown = false, locked = false, w;
+let i = 0, x0 = null, y0 = null, mousedown = false, swiping = false, scrolling = false, w;
 
 var container = document.querySelector(".container"),
     title = document.getElementById("title")
@@ -212,8 +212,8 @@ function unify(e) {
 // }
 
 function move(e) {
-    console.log("why isn't it lockeding?? " + locked);
-    if (locked) {
+    // console.log("why isn't it lockeding?? " + locked);
+    if (swiping) {
         let dx = unify(e).clientX - x0, 
             // dy = unify(e).clientY - y0,
             s = Math.sign(dx),
@@ -226,27 +226,19 @@ function move(e) {
         container.style.setProperty("--tx", "0px");
         container.style.setProperty("--f", f);
         container.classList.toggle("smooth");
-        console.log("am i not togglin'????");
-        locked = false;
+        // console.log("am i not togglin'????");
+        swiping = false;
         mousedown = false;
         x0 = null;
         // y0 = null;
-    }  
+    } else if (scrolling) {
+        scrolling = false;
+    }
 }
 
 function mouseMoved(e){
     console.log("in mouse moved " + e);
-    if (locked) {
-         e.preventDefault();
-        if (mousedown) {
-            // console.log("dx = " + (unify(e).clientX - x0));
-            container.style.setProperty("--tx", `${Math.round(unify(e).clientX - x0)}px`);
-        }
-    } else if (mousedown && Math.abs(unify(e).clientX - x0) > Math.abs(unify(e).clientY) -y0) {
-        container.classList.toggle("smooth"); 
-        locked = true;
-        console.log("is .. am i here?");
-    } else {
+    if (!mousedown) {
         showText();
         if (mouseTimer) {
             window.clearTimeout(mouseTimer);
@@ -255,7 +247,21 @@ function mouseMoved(e){
             showText();
         }
         mouseTimer = window.setTimeout(hideText, WAIT_TIME);
-    }
+    } else if (swiping) {
+        e.preventDefault();
+        container.style.setProperty("--tx", `${Math.round(unify(e).clientX - x0)}px`);
+    } else if (scrolling) {
+        return;
+    } else {
+        let dx = Math.abs(unify(e).clientX - x0),
+            dy = Math.abs(unify(e).clientY - y0);
+        if (dx > dy) {
+            container.classList.toggle("smooth"); 
+            swiping = true;    
+        } else {
+            scrolling = true;
+        }
+    } 
 }
 
 function mousePressed(e) {
