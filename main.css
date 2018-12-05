@@ -62,16 +62,14 @@ body, html {
 }
 
 .stupid-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: calc(100%/var(--n));
     height: 100%;
 }
 
 .image {
-    display: block;
-    margin: auto;
-    /*width: 50%; */
-
-    /*align-items: center;*/
     max-height: 100%;
     max-width: calc(100%/var(--n));
     max-width: 100vw;
@@ -83,7 +81,7 @@ body, html {
     -webkit-user-select: none;
 }
 
-.smooth { transition: transform  calc(var(--f, 1)*.5s) ease-out }
+.smooth { transition: transform  calc(var(--f, 1)*.3s) ease-out }
 
 .title-position {
     position: absolute;

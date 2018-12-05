@@ -6,7 +6,14 @@ basic shit: swiping, first to last photo...
 
 shop, fullscreen, share...
 
+blehhhh scrolling is fucked...
 
+swipe threshold needs to be way lower
+
+
+eeveakl;rj;lakejr; everything is fuked this is efucked up 
+
+footer also sucks on mobile
 */
 
 /** This is a website. */
