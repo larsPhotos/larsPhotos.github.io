@@ -93,7 +93,7 @@ function loadPhotos() {
 
     // populate swipe view
     for (var i = 0; i < photos.length; i++) {
-        container.innerHTML += "<div class='stupid-container'><img src=photos/small/" + photos[i].file + " class='image'></div>";
+        container.innerHTML += "<div class='frame'><img src=photos/small/" + photos[i].file + " class='image'></div>";
     }   
 }
 
