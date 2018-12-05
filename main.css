@@ -3,10 +3,11 @@ All CSS should be "-" formatted
 */
 body, html {
     height: 100%;
-    margin: 0;
     padding: 0;
     overflow-x: hidden;
     position: relative;
+    overflow: scroll;
+    -webkit-overflow-scrolling: touch;
 }
 
 .background {
@@ -20,7 +21,7 @@ body, html {
     margin: auto;
     overflow: auto;
     z-index: -1; /* move to back */
-
+s
     /* Center and scale the image nicely */
     background-position: center;
     background-repeat: no-repeat;
@@ -81,13 +82,13 @@ body, html {
     -webkit-user-select: none;
 }
 
-.smooth { transition: transform  calc(var(--f, 1)*.5s) ease-out }
+.smooth { transition: transform  calc(var(--f, 1)*.3s) ease-out }
 
 .title-position {
     position: absolute;
     right: 50%;
-    top: 93%;
-    transform: translate(50%, -93%);
+    top: 99%;
+    transform: translate(50%, -99%);
     text-align: center;
     white-space: nowrap;
 }
@@ -110,7 +111,7 @@ body, html {
 .banner {
     position: absolute;
     z-index: 1;
-    font: .6em arial, sans-serif;
+    font: .4em arial, sans-serif;
     /*font: .6em arial, sans-serif;*/
     left: 50%;
     top: 50%;
@@ -205,14 +206,14 @@ h5 {
     font-style: normal;
     /*font-size: 50px;*/
     /*font-size: 2em;*/
-    font-size: 7vmin;
+    font-size: 5vmin;
 }
 
 .metadata {
     /*font: 1em courier, sans-serif;*/
     /*font: 3vmin courier, sans-serif;*/
     font-family: 'courier';
-    font-size: 3vmin;
+    font-size: 2vmin;
     /*transform: translate(0%, -6vmin);*/
     position: relative;
     bottom: 2.4em;
@@ -225,7 +226,7 @@ h5 {
 
 .relative {
     position: relative;
-    bottom: -.8em;
+    bottom: -.2em;
 }
 
 .index {
@@ -307,8 +308,8 @@ h5 {
     opacity: .5;
 }
 
-.small_text {
-    font: 4vmin arial, sans-serif;
+.small-text {
+    font: 3vmin arial, sans-serif;
     overflow: hidden;
     margin:0px;
 
@@ -327,20 +328,20 @@ h5 {
 .left_arrow {
     position: absolute;
     bottom: 50%;
-    left: 3%;
+    left: 2%;
 }
 
 .right_arrow {
     position: absolute;
     bottom: 50%;
-    right: 3%;
+    right: 2%;
 }
 
 .down_arrow {
     position: absolute;
-    bottom: 2%;
+    bottom: 1%;
     left: 50%;
-    transform: translate(50%, 2%);
+    transform: translate(50%, 1%);
 }
 
 .rotate {
@@ -370,8 +371,8 @@ h5 {
 .preview-image {
     padding: none;
     width: 100%;
-    /*user-select: none;
-    pointer-events: none;*/
+    user-select: none;
+    /*pointer-events: none;*/
     -khtml-user-select: none;
     -o-user-select: none;
     -moz-user-select: none;
@@ -408,8 +409,8 @@ h5 {
         font-size: 50px;
     }
 
-    .small_text {
-        font-size: 15px;
+    .small-text {
+        font-size: 12px;
     }
 
     .medium_text {
@@ -426,9 +427,12 @@ h5 {
 
 footer {
     white-space: nowrap;
+    margin: 0px auto;
+    text-align: center;
 }
 
 ul {
+    padding: 4px;
     list-style-type: none;
     text-align: center;
     overflow: hidden;
@@ -440,9 +444,9 @@ li {
 }
 
 li a {
-    display: inline-block;
-    color: white;
-    text-align: center;
+    /*display: inline-block;
+    color: white;*/
+    
 }
 
 button {

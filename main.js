@@ -16,7 +16,7 @@ first to last photo...
 
 blehhhh scrolling is fucked...
 
-footer sucks on mobile
+footer needs to be centered
 
 make it faster
 
@@ -32,7 +32,7 @@ shop, fullscreen, share...
 
 // biggest photos: manor hosue, corbett house, portlandia IV, marssh, enchanted
 
-// wait for something to go away
+// Time in milliseconds till text is hidden
 const WAIT_TIME = 1800;
 
 // const WAIT_TIME = 180000;
@@ -218,7 +218,7 @@ function move(e) {
             // dy = unify(e).clientY - y0,
             s = Math.sign(dx),
             f = +(s*dx/w).toFixed(2);
-        if ((i > 0 || s < 0) && (i < N - 1 || s > 0) && f > .1) {
+        if ((i > 0 || s < 0) && (i < N - 1 || s > 0) && f > .07) {
             container.style.setProperty('--i', i -= s);
             f = 1 - f;
             update(false);
