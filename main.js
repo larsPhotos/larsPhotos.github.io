@@ -2,18 +2,28 @@
 
 bugs: 
 
-basic shit: swiping, first to last photo...
+fix scrolling
 
-shop, fullscreen, share...
+don't show text when swiping or scrolling
+
+gestures: 
+swipe, scroll, zoom, tap, hold, ...
+
+tap to show, tap to hide? 
+
+make 
+first to last photo...
 
 blehhhh scrolling is fucked...
 
-swipe threshold needs to be way lower
+footer sucks on mobile
 
+make it faster
 
-eeveakl;rj;lakejr; everything is fuked this is efucked up 
+add readme
 
-footer also sucks on mobile
+shop, fullscreen, share...
+
 */
 
 /** This is a website. */
@@ -35,7 +45,7 @@ var mouseTimer = null, cursorVisible = true;
 
 var photos;
 
-let i = 0, x0 = null, locked = false, w;
+let i = 0, x0 = null, y0 = null, mousedown = false, locked = false, w;
 
 var container = document.querySelector(".container"),
     title = document.getElementById("title")
@@ -44,13 +54,13 @@ var container = document.querySelector(".container"),
 
 loadData();
 loadPhotos();
-update();
 mouseMoved();
+
+title.innerHTML = formatTitle(photos[i]);
+metadata.innerHTML = formatMetadata(photos[i]);
 
 var N = container.children.length;
 container.style.setProperty("--n", N);
-
-console.log("N = " + N);
 
 function size() { w = window.innerWidth };
 size();
@@ -81,13 +91,10 @@ function loadPhotos() {
         }    
     }    
 
-    console.log("photos.length - 1 = " + (photos.length - 1));
     // populate swipe view
     for (var i = 0; i < photos.length; i++) {
         container.innerHTML += "<div class='stupid-container'><img src=photos/small/" + photos[i].file + " class='image'></div>";
     }   
-
-    // console.log("container length in load = " + container.children.length);
 }
 
 
@@ -115,11 +122,11 @@ function formatMetadata(photo) {
 }
 
 function update(animate) {
-    if (cursorVisible) {
-        mouseMoved();
-    }
+    // if (cursorVisible) {
+    //     mouseMoved();
+    // }
 
-    container.classList.toggle("smooth", animate);    
+    // container.classList.toggle("smooth", animate);    
     container.style.setProperty("--i", i);
     container.scrollIntoView();
 
@@ -141,17 +148,6 @@ function showText() {
     document.body.style.cursor = "default";
     cursorVisible = true;
 }
-
-function mouseMoved(){
-    showText();
-    if (mouseTimer) {
-        window.clearTimeout(mouseTimer);
-    }
-    if (!cursorVisible) {
-        showText();
-    }
-    mouseTimer = window.setTimeout(hideText, WAIT_TIME);
-};
 
 // handling Internet Explorer stupidity with window.event
 // @see http://stackoverflow.com/a/3985882/517705    
@@ -187,52 +183,99 @@ function photo(index) {
 window.setTimeout(hideBanner, WAIT_TIME);
 
 function hideBanner() {
-    document.getElementById("banner").className = "text-block banner hidden";
+    document.getElementById("banner").classList.add("hidden");
 }
 
 function unify(e) { 
-    console.log("unify");
+    // console.log("unify");
     return e.changedTouches ? e.changedTouches[0] : e;
 }
 
-function lock(e) {
-    console.log("locking");
-    x0 = unify(e).clientX;
-    container.classList.toggle('smooth', !(locked = true)); 
-}
+// function lock(e) {
+//     console.log("locking");
+//     x0 = unify(e).clientX;
+//     container.classList.toggle('smooth', !(mousedown = true)); 
+// }
 
-function drag(e) {
-    console.log("drag");
-    mouseMoved(); // this is going to be a problem
-    e.preventDefault();
-    if (locked) {
-        container.style.setProperty("--tx", `${Math.round(unify(e).clientX - x0)}px`);
-    }
-}
+// function swipe(e) {
+//     // console.log("drag");
+//     // x0 = unify(e).clientX;
+//     // console.log("in swipe " + e);
+    
+//     // mouseMoved(); // this is going to be a problem
+
+//     e.preventDefault();
+//     if (mousedown) {
+//         // console.log("dx = " + (unify(e).clientX - x0));
+//         container.style.setProperty("--tx", `${Math.round(unify(e).clientX - x0)}px`);
+//     }
+// }
 
 function move(e) {
-    console.log("move");
+    console.log("why isn't it lockeding?? " + locked);
     if (locked) {
         let dx = unify(e).clientX - x0, 
+            // dy = unify(e).clientY - y0,
             s = Math.sign(dx),
             f = +(s*dx/w).toFixed(2);
-        if ((i > 0 || s < 0) && (i < N - 1 || s > 0) && f > .2) {
+        if ((i > 0 || s < 0) && (i < N - 1 || s > 0) && f > .1) {
             container.style.setProperty('--i', i -= s);
             f = 1 - f;
             update();
         }
         container.style.setProperty("--tx", "0px");
         container.style.setProperty("--f", f);
-        container.classList.toggle('smooth', !(locked = false));
+        container.classList.toggle("smooth");
+        console.log("am i not togglin'????");
+        locked = false;
+        mousedown = false;
         x0 = null;
+        // y0 = null;
     }  
 }
 
-container.addEventListener("mousedown", lock, false);
-container.addEventListener("touchstart", lock, false);
+function mouseMoved(e){
+    console.log("in mouse moved " + e);
+    if (locked) {
+         e.preventDefault();
+        if (mousedown) {
+            // console.log("dx = " + (unify(e).clientX - x0));
+            container.style.setProperty("--tx", `${Math.round(unify(e).clientX - x0)}px`);
+        }
+    } else if (mousedown && Math.abs(unify(e).clientX - x0) > Math.abs(unify(e).clientY) -y0) {
+        container.classList.toggle("smooth"); 
+        locked = true;
+        console.log("is .. am i here?");
+    } else {
+        showText();
+        if (mouseTimer) {
+            window.clearTimeout(mouseTimer);
+        }
+        if (!cursorVisible) {
+            showText();
+        }
+        mouseTimer = window.setTimeout(hideText, WAIT_TIME);
+    }
+}
 
-container.addEventListener("mousemove", drag, false);
-container.addEventListener("touchmove", drag, false);
+function mousePressed(e) {
+    mousedown = true;
+    x0 = unify(e).clientX;
+    y0 = unify(e).clientY;
+    // console.log("x0 = " + x0);
+    // console.log("woaowaowa d??????");
+}
+
+// var mousedown;
+
+container.addEventListener("mousedown", mousePressed, false);
+container.addEventListener("touchstart", mousePressed, false);
+
+container.addEventListener("mousemove", mouseMoved, false);
+container.addEventListener("touchmove", mouseMoved, false);
+
+// container.addEventListener("mousemove", drag, false);
+// container.addEventListener("touchmove", drag, false);
 
 container.addEventListener("mouseup", move, false);
 container.addEventListener("touchend", move, false);
