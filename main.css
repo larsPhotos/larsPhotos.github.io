@@ -370,6 +370,12 @@ h5 {
 .preview-image {
     padding: none;
     width: 100%;
+    /*user-select: none;
+    pointer-events: none;*/
+    -khtml-user-select: none;
+    -o-user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;   
 }
 
 .preview-image:hover {
@@ -403,7 +409,7 @@ h5 {
     }
 
     .small_text {
-        font-size: 20px;
+        font-size: 15px;
     }
 
     .medium_text {

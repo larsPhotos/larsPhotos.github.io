@@ -153,9 +153,9 @@ function showText() {
 // @see http://stackoverflow.com/a/3985882/517705    
 function checkKeycode(event) {
     window.clearTimeout(mouseTimer);
-    if (cursorVisible) {
-        mouseMoved();
-    }
+    // if (cursorVisible) {
+    //     mouseMoved();
+    // }
     var keyDownEvent = event || window.event,
         keycode = (keyDownEvent.which) ? keyDownEvent.which : keyDownEvent.keyCode;
     if (keycode == 37) { // left arrow
@@ -221,12 +221,12 @@ function move(e) {
         if ((i > 0 || s < 0) && (i < N - 1 || s > 0) && f > .1) {
             container.style.setProperty('--i', i -= s);
             f = 1 - f;
-            update();
+            update(false);
         }
         container.style.setProperty("--tx", "0px");
         container.style.setProperty("--f", f);
-        container.classList.toggle("smooth");
-        // console.log("am i not togglin'????");
+        // container.classList.toggle("smooth");
+        console.log("am i not togglin'????");
         swiping = false;
         mousedown = false;
         x0 = null;
@@ -256,7 +256,7 @@ function mouseMoved(e){
         let dx = Math.abs(unify(e).clientX - x0),
             dy = Math.abs(unify(e).clientY - y0);
         if (dx > dy) {
-            container.classList.toggle("smooth"); 
+            // container.classList.toggle("smooth"); 
             swiping = true;    
         } else {
             scrolling = true;
@@ -274,6 +274,8 @@ function mousePressed(e) {
 
 // var mousedown;
 
+document.onkeydown = checkKeycode;
+
 container.addEventListener("mousedown", mousePressed, false);
 container.addEventListener("touchstart", mousePressed, false);
 
@@ -286,4 +288,4 @@ container.addEventListener("touchmove", mouseMoved, false);
 container.addEventListener("mouseup", move, false);
 container.addEventListener("touchend", move, false);
 
-document.onkeydown = checkKeycode;
+
