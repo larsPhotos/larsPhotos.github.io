@@ -2,6 +2,13 @@
 
 bugs: 
 
+
+a single tap locks for some reason.. . 
+
+mouse hiding stuff
+
+arrows stay presseD?
+
 fix scrolling
 
 don't show text when swiping or scrolling
@@ -33,7 +40,7 @@ shop, fullscreen, share...
 // biggest photos: manor hosue, corbett house, portlandia IV, marssh, enchanted
 
 // Time in milliseconds till text is hidden
-const WAIT_TIME = 1800;
+const WAIT_TIME = 2000;
 
 // const WAIT_TIME = 180000;
 
@@ -55,6 +62,7 @@ var container = document.querySelector(".container"),
 loadData();
 loadPhotos();
 mouseMoved();
+showText();
 
 title.innerHTML = formatTitle(photos[i]);
 metadata.innerHTML = formatMetadata(photos[i]);
@@ -144,6 +152,15 @@ function hideText() {
 }
 
 function showText() {
+    // showText();
+    if (mouseTimer) {
+        window.clearTimeout(mouseTimer);
+    }
+    // if (!cursorVisible) {
+    //     showText();
+    // }
+    mouseTimer = window.setTimeout(hideText, WAIT_TIME);
+    
     page.classList.remove("hidden");
     document.body.style.cursor = "default";
     cursorVisible = true;
@@ -235,6 +252,10 @@ function move(e) {
         scrolling = false;
         container.addEventListener("mousemove", mouseMoved, false);
         container.addEventListener("touchmove", mouseMoved, false);
+    } else {
+        mousedown = false;
+        x0 = null;
+        y0 = null;
     }
 }
 

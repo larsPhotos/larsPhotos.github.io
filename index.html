@@ -16,7 +16,7 @@
 
 <div class="background"></div>
 
-<div id="banner" class="text-block banner">
+<div id="banner" class="opaque-box banner">
     <p>
         <h1>
             lars.photos
@@ -31,21 +31,23 @@
     <!-- <div class="site-banner">photogrpahyt by lars mayrand</div> -->
     
     <div class="title-position">
-        <div id="title" class="text-block title"></div>    
-        <div id="metadata-box" class="text-box"></div>
-        <div id="metadata" class="outline-text metadata"></div>
+        <div id="title" class="opaque-box title large-text"></div>    
+        <div class="transparent-box"></div>
+        <div id="metadata" class="outline-text metadata small-text"></div>
 
         <!-- <p class="small_text raised">Scroll</p> -->
-        <a href="#grid-view" title="grid view" class="medium_text rotate relative">&#8250;</a>
+        <!-- <a href="#grid-view"class="outline-text medium-text rotate relative">&#8250;</a> -->
+        <button class="outline-text medium-text rotate relative">&#8250;</button>
+        <!-- button should animate scroll to grid view -->
     </div>
 
-    <div class="left_arrow">
-        <button title="previous" class="medium_text" onclick="previous()">&#8249;</button> 
+    <div class="left-arrow">
+        <button title="previous" class="outline-text medium-text" onclick="previous()">&#8249;</button> 
         <!-- <p class="small_text">Swipe</p> -->
     </div>
     
-    <div class="right_arrow">
-        <button title="next" class="medium_text" onclick="next()">&#8250;</button>
+    <div class="right-arrow">
+        <button title="next" class="outline-text medium-text" onclick="next()">&#8250;</button>
         <!-- <p class="small_text">Swipe</p> -->
     </div>    
 </div>     
@@ -77,7 +79,7 @@
                 <i class="fa fa-instagram fa-2x"></i>
             </a>
         </li>
-        <li class="small-text">
+        <li class="text small-text">
             <i class="fa fa-copyright" aria-hidden="true"></i>
             Lars Mayrand 2018
         </li>
